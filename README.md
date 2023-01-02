@@ -14,10 +14,11 @@ Instala todas as dependencias que o projeto precisa para ser iniciado
 Inicia o projeto na porta 3000
 Open [http://localhost:3000](http://localhost:3000).
 
-### Recursos externos
+### `Recursos externos`
 
 Api utilizada para obter os dados dos pokemons [https://pokeapi.co/api/v2](https://pokeapi.co/api/v2)
-Dominio que usei para conseguir as imagens dos pokemons [https://assets.pokemon.com/assets/cms2/img/pokedex/full/001.png](https://assets.pokemon.com/assets/cms2/img/pokedex/full/001.png)
+
+Dominio que usei para conseguir as imagens dos pokemons [https://assets.pokemon.com/assets/cms2/img/pokedex/full/001.png](https://assets.pokemon.com/assets/cms2/img/pokedex/full/001.png) onde o `001` corresponde ao numero que o pokemon possui na pokedex
 
 ### `Descriçãp do projeto`
 
