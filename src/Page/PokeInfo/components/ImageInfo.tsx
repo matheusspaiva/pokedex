@@ -3,6 +3,7 @@ import { Modal } from "../../../components/Modal/Modal";
 import { useModal } from "../../../components/Modal/useModal";
 import getNumber from "../scripts/getNumber"
 import './../index.css';
+
 const ImageInfo: React.FC<{numero:string|undefined , images : string[]}> = ({numero,images}) => {
     const { isShown, toggle, setIsShown } = useModal();
     

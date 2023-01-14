@@ -6,20 +6,55 @@
 
 }
 
-.bodyCard {
+.title-card {
     text-Align: center;
     margin-Top: 10px;
+
 }
 
-.box{
+.box {
     border: 4px solid black;
     border-radius: 10px;
     width: 30%;
     margin-top: 10px;
+    background-color: red;
 }
 
-.imageContent{
-    border: 4px solid red;
+.imageContent {
+    border: 4px solid blue;
     border-radius: 10px;
-    margin: 20px;
+    padding: 10px;
+    margin: 10px;
+    background-color: white;
+}
+
+.section-type {
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.type-Card {
+    text-Align: center;
+    margin-Top: 10px;
+    background-color: white;
+    border: 2px solid black;
+}
+
+.info-box {
+    margin: 10px;
+    padding: 5px;
+    background-color: white;
+    border: 2px solid black;
+}
+
+.move-box {
+    background-Color: gray;
+    margin-Top: 10px;
+    border: 2px solid black;
+    margin: 10px;
+    padding: 5px;
 }

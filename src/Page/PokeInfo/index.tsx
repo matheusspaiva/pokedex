@@ -34,7 +34,7 @@ const PokeInforamacoes: React.FC = () => {
         <>
         {info && <div className='container'>
             <div className='box'> 
-         <div className='bodyCard'>{info?.name}</div>
+         <div className='title-card'>{info?.name}</div>
              <ImageInfo numero={id} images={img} />
              <SectionInfo tipos={info?.types!}/>
              <Informations info={info!}/>
