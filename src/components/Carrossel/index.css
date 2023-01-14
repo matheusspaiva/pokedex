@@ -1,0 +1,12 @@
+.item-carrossel{
+    display: block;
+    width: 700;
+
+}
+
+.box-carrossel{
+    display: block;
+ 
+    padding: 30;
+    background-color: #313947;
+}

@@ -8,11 +8,11 @@ const ListaPokemon: React.FC<{listaPoke: pokemomLista[]}> = ({listaPoke}) => {
 
     return (
         <div style={{display: "flex", flexWrap:"wrap", alignContent:"center"}}>    
-        {listaPoke && listaPoke?.map(i=>
+        {listaPoke && listaPoke?.map((i, index)=>
 
 
         
-        <div style={{border: "2px solid red", padding:"10px", margin:"10px", borderRadius:"10px"}}>
+        <div key={i.name} style={{border: "2px solid red", padding:"10px", margin:"10px", borderRadius:"10px"}}>
                 <Link to={`./${getIndex(i.url)}`}>
         <img alt={`${i.name}`} width={200}  src={`https://assets.pokemon.com/assets/cms2/img/pokedex/full/${getIndex(i.url, true)}.png`} title={i.name}></img>
         <p style={{textAlign:"center"}}>{`#${getIndex(i.url)} ${i.name}`}</p>     
