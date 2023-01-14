@@ -4,6 +4,7 @@ import ImageInfo from './components/ImageInfo'
 import Informations from './components/Informations'
 import SectionInfo from './components/selectTypes'
 import PokeInfo from './types'
+import './index.css';
 
 const PokeInforamacoes: React.FC = () => {
 
@@ -24,11 +25,13 @@ const PokeInforamacoes: React.FC = () => {
     return (
 
         <>
-        {info && <div style={{display:"flex", flexDirection:"column", width:"30%"}}>
-         <div style={{textAlign:"center", marginTop:"10px"}}>{info?.name}</div>
+        {info && <div className='container'>
+            <div className='box'> 
+         <div className='bodyCard'>{info?.name}</div>
              <ImageInfo numero={id} />
              <SectionInfo tipos={info?.types!}/>
              <Informations info={info!}/>
+             </div>
          </div>}
         </>
     )

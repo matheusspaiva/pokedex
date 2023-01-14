@@ -18,7 +18,7 @@ const Informations: React.FC<{info:PokeInfo}> = ({info}) => {
             </div>
 
             <div style={{backgroundColor:"gray", marginTop:"10px"}}>
-                <label>Abilidades: </label>
+                <label>Abilidades:: </label>
                 {info.moves.slice(0,4).map(item=>
                     <>
                     <br></br>

@@ -5,13 +5,17 @@ import './index.css';
 import TextField from '@mui/material/TextField';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
+import Spinner from '../../components/Loader';
+
 const PokeList: React.FC = () => {
 
     const [listaPoke, setListaPoke] = useState<pokemomLista[]>()
     const [listaPokeFilter, setListaPokeFilter] = useState<pokemomLista[]>()
     const [gen, setGen] = useState<number>(1)
+    const [load, setLoad] = useState<boolean>(true)
 
     useEffect(() => {
+        setLoad(true)
         let valueUrl = ''
         if(gen===1) valueUrl = 'https://pokeapi.co/api/v2/pokemon/?offset=0&limit=151'
         if(gen===2) valueUrl = 'https://pokeapi.co/api/v2/pokemon/?offset=151&limit=100'
@@ -29,8 +33,9 @@ const PokeList: React.FC = () => {
         }).then(data => {
             setListaPokeFilter(data.results)
             setListaPoke(data.results)
+            setLoad(false)
         })
-    }, [gen])
+    }, [gen, setLoad])
 
     function handleSearchName(value: string){
 
@@ -47,19 +52,21 @@ const PokeList: React.FC = () => {
             </div>
             <div>
             <Select  id="demo-simple-select" value={gen}  onChange={(e) => setGen(Number(e.target.value))}>
-    <MenuItem value={1}>1 Geração</MenuItem>
-    <MenuItem value={2}>2 Geração</MenuItem>
-    <MenuItem value={3}>3 Geração</MenuItem>
-    <MenuItem value={4}>4 Geração</MenuItem>
-    <MenuItem value={5}>5 Geração</MenuItem>
-    <MenuItem value={6}>6 Geração</MenuItem>
-    <MenuItem value={7}>7 Geração</MenuItem>
-    <MenuItem value={8}>8 Geração</MenuItem>
-  </Select>
+                <MenuItem value={1}>1 Geração</MenuItem>
+                <MenuItem value={2}>2 Geração</MenuItem>
+                <MenuItem value={3}>3 Geração</MenuItem>
+                <MenuItem value={4}>4 Geração</MenuItem>
+                <MenuItem value={5}>5 Geração</MenuItem>
+                <MenuItem value={6}>6 Geração</MenuItem>
+                <MenuItem value={7}>7 Geração</MenuItem>
+                <MenuItem value={8}>8 Geração</MenuItem>
+            </Select>
   </div>
             </div>
             <div>
-                <ListaPokemon listaPoke={listaPokeFilter!} />
+           {load && <Spinner/>}
+               {!load && <ListaPokemon listaPoke={listaPokeFilter!} />}
+
             </div>
 
         </>
