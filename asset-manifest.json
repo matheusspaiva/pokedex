@@ -1,0 +1,27 @@
+{
+  "files": {
+    "main.css": "/pokedex/static/css/main.29f94078.css",
+    "main.js": "/pokedex/static/js/main.647a35d4.js",
+    "static/js/787.7e0b23c5.chunk.js": "/pokedex/static/js/787.7e0b23c5.chunk.js",
+    "static/media/Grass.png": "/pokedex/static/media/Grass.0c1b0bb842d1458706e6.png",
+    "static/media/Fairy.png": "/pokedex/static/media/Fairy.8c51b4529cb095db6df2.png",
+    "static/media/fire.png": "/pokedex/static/media/fire.e8f050a1f6b20a70a728.png",
+    "static/media/Dragon.png": "/pokedex/static/media/Dragon.e0f9a009aab9c7f8e5b9.png",
+    "static/media/Poison.png": "/pokedex/static/media/Poison.cb047ab9235965153842.png",
+    "static/media/Water.png": "/pokedex/static/media/Water.e57cab9102dfc022d65d.png",
+    "static/media/Bug.png": "/pokedex/static/media/Bug.1262412b830f7c424aab.png",
+    "static/media/Ground.png": "/pokedex/static/media/Ground.e328e0519de1707ead28.png",
+    "static/media/Rock.png": "/pokedex/static/media/Rock.f9857a92f7aefc45b056.png",
+    "static/media/Fighting.png": "/pokedex/static/media/Fighting.33afa42e022c6a573058.png",
+    "static/media/5.svg": "/pokedex/static/media/5.323de4520da2577d49cb24263b710b74.svg",
+    "static/media/1.svg": "/pokedex/static/media/1.e2517784692dfac0299464832a638bc1.svg",
+    "index.html": "/pokedex/index.html",
+    "main.29f94078.css.map": "/pokedex/static/css/main.29f94078.css.map",
+    "main.647a35d4.js.map": "/pokedex/static/js/main.647a35d4.js.map",
+    "787.7e0b23c5.chunk.js.map": "/pokedex/static/js/787.7e0b23c5.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.29f94078.css",
+    "static/js/main.647a35d4.js"
+  ]
+}
