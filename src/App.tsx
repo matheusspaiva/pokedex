@@ -15,7 +15,7 @@ function App() {
         <br></br>
         <a
           className="App-link"
-          href="Pokemons"
+          href="pokedex/Pokemons"
           rel="noopener noreferrer"
         >
           Acesse a Pokedex
