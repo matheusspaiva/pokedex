@@ -21,14 +21,20 @@ const PokeInforamacoes: React.FC = () => {
               {
                 setErro(null)
                 setInfo(data)
-                const images :string[]= [] 
-                for (const key in data.sprites) {
-                    const tipo = typeof (data.sprites as any)[key]
-                    console.log(tipo)
-                    if(tipo === 'string'){
-                        images.push((data.sprites as any)[key])
-                    }
-                }
+                const images :string[]= [
+                    data.sprites.front_default, data.sprites.back_default, 
+                    data.sprites.front_female, data.sprites.back_female ,
+                    data.sprites.front_shiny, data.sprites.back_shiny, 
+                    data.sprites.front_shiny_female, data.sprites.back_shiny_female
+                    ]
+             
+                    // for (const key in data.sprites) {
+                //     const tipo = typeof (data.sprites as any)[key]
+                //     console.log(tipo)
+                //     if(tipo === 'string'){
+                //         images.push((data.sprites as any)[key])
+                //     }
+                // }
 
                 setImg(images?.filter(x=> x !== null && x.length>0))
           }).catch(() => {
