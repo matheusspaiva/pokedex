@@ -5,7 +5,7 @@ import Informations from './components/Informations'
 import SectionInfo from './components/selectTypes'
 import PokeInfo from './types'
 import './index.css';
-import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
+import { FaArrowLeft, FaArrowRight, FaRegWindowClose } from "react-icons/fa";
 
 const PokeInforamacoes: React.FC = () => {
 
@@ -49,7 +49,10 @@ const PokeInforamacoes: React.FC = () => {
             </Link>
         </div>
             <div className='box'> 
-         <div className='title-box'><p className='title-card'>{info?.name}</p></div>
+         <div className='title-box'>
+            <p className='title-card'>{info?.name}</p>
+            <Link to={'/pokedex/Pokemons'} className='tile-buttom'> <h2><FaRegWindowClose /></h2></Link>
+         </div>
              <ImageInfo numero={id} images={img} />
              <SectionInfo tipos={info?.types!}/>
              <Informations info={info!}/>
