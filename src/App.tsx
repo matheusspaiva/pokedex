@@ -2,6 +2,7 @@ import logo1 from './assets/Image/1.svg';
 import logo5 from './assets/Image/5.svg';
 import './App.css';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 function App() {
   const [color,setColor] = useState<boolean>(false)
@@ -13,13 +14,13 @@ function App() {
         </div>
 
         <br></br>
-        <a
+        <Link
           className="App-link"
-          href="pokedex/Pokemons"
+          to="Pokemons"
           rel="noopener noreferrer"
         >
           Acesse a Pokedex
-        </a>
+        </Link>
       </header>
     </div>
   );

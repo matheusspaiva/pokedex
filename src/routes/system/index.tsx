@@ -11,9 +11,8 @@ const SystemRoute: React.FC = () => {
 
         <Routes>
               <Route index element={<PageRender pageName="System_Home" pageTitle="Pokedex" renderComponent={<App />} />}/>
-              <Route path='pokedex' element={<PageRender pageName="System_Home" pageTitle="Pokedex" renderComponent={<App />} />}/>
-                   <Route path='pokedex/Pokemons' element={<PageRender pageName="System_Home" pageTitle="Pokedex" renderComponent={<PokeList />} />}/>
-                   <Route path='pokedex/Pokemons/:id' element={<PageRender pageName="System_Home" pageTitle="Pokedex" renderComponent={<PokeInforamacoes />} />}/>
+                   <Route path='/Pokemons' element={<PageRender pageName="System_Home" pageTitle="Pokedex" renderComponent={<PokeList />} />}/>
+                   <Route path='/Pokemons/:id' element={<PageRender pageName="System_Home" pageTitle="Pokedex" renderComponent={<PokeInforamacoes />} />}/>
         </Routes>
     )
 }
