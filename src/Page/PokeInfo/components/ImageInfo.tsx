@@ -16,7 +16,7 @@ const ImageInfo: React.FC<{numero:string|undefined , images : string[]}> = ({num
             
             <Modal isShown={isShown} hide={toggle} modalContent={<>
                 <Carrossel urls={images} />
-        </>} headerText={"Lista de Habilidades Completa"} />
+        </>} headerText={"SPRITS"} />
 
             </>
 

@@ -36,10 +36,11 @@ const PokeInforamacoes: React.FC = () => {
           })
 
     }, [id, setImg, setErro])
+
     return (
 
         <>
-        {erro && <h1>{erro}</h1>}
+        {erro && <h1>{erro} <p className='paragrafo-link' onClick={()=> window.history.back()}> CLIQUE AQUI PARA RETORNAR</p></h1>}
         {info && erro===null &&
         <>
         <div className='container'>

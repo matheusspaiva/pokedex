@@ -88,3 +88,10 @@
     background-color: red;
     cursor: pointer;
 }
+
+.paragrafo-link{
+    cursor: pointer;
+    color: blue;
+    text-decoration: underline;
+    font-size: 20px;
+}

@@ -20,7 +20,7 @@ const Informations: React.FC<{info:PokeInfo}> = ({info}) => {
                 </div>
             </div>
             <div className="move-box" style={{backgroundColor:"gray", marginTop:"10px"}}>
-                <label>Habilidades : </label>
+                <label>Moviemtos : </label>
                 {info.moves.slice(0,4).map(item=>
                     <div key={item.move.name}>
                     {item.move.name}
