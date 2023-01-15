@@ -44,7 +44,7 @@ const PokeInforamacoes: React.FC = () => {
         <>
         <div className='container'>
         <div>
-        <Link className='circle-buttom' to={`../pokedex/Pokemons${Number(id)-1}`}>
+        <Link className='circle-buttom' to={`/pokedex/Pokemons/${Number(id)-1}`}>
         <FaArrowLeft />
             </Link>
         </div>
@@ -55,7 +55,7 @@ const PokeInforamacoes: React.FC = () => {
              <Informations info={info!}/>
              </div>
              <div >
-             <Link className='circle-buttom' to={`../pokedex/Pokemons/${Number(id)+1}`}>
+             <Link className='circle-buttom' to={`/pokedex/Pokemons/${Number(id)+1}`}>
         <FaArrowRight />
             </Link>
              </div>
