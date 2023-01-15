@@ -5,7 +5,7 @@ import './index.css';
 import TextField from '@mui/material/TextField';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
-import Spinner from '../../components/Loader';
+import Pulse from '../../components/Loader/Pulse';
 
 const PokeList: React.FC = () => {
 
@@ -64,7 +64,7 @@ const PokeList: React.FC = () => {
   </div>
             </div>
             <div>
-           {load && <Spinner/>}
+           {load && <Pulse/>}
                {!load && <ListaPokemon listaPoke={listaPokeFilter!} />}
 
             </div>

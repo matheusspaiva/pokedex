@@ -2,7 +2,7 @@ import React, { CSSProperties }  from 'react'
 import PulseLoader from 'react-spinners/PulseLoader';
 
 
-const Spinner: React.FC = () => {
+const Pulse: React.FC = () => {
 
     const override: CSSProperties = {
         display: "block",
@@ -27,4 +27,4 @@ const Spinner: React.FC = () => {
 
     )
 }
-export default Spinner
+export default Pulse
