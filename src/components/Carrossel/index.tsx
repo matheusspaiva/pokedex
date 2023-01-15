@@ -13,7 +13,7 @@ const Carrossel: React.FC <{urls : string[]}> = ({urls}) => {
   <img key={item}
     className="d-block w-100 box-carrossel"
     src={item}
-
+      alt=''
   />
 </Carousel.Item>
 
