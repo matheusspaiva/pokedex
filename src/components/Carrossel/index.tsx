@@ -4,8 +4,8 @@ import './index.css';
 
 const Carrossel: React.FC <{urls : string[]}> = ({urls}) => {
   return (
-    <div style={{ display: 'block', }}>
-    <Carousel fade>
+    <div style={{ display: 'block', width:200 }}>
+    <Carousel>
 
     {urls.map((item, index)=>
 
