@@ -3,6 +3,7 @@ import logo5 from './assets/Image/5.svg';
 import './App.css';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import PacMan from './components/Loader/PacMan';
 
 function App() {
   const [color,setColor] = useState<boolean>(false)
@@ -14,12 +15,26 @@ function App() {
         </div>
 
         <br></br>
-        <Link
+        <Link 
           className="App-link"
           to="Pokemons"
           rel="noopener noreferrer"
         >
+          <div className='box-text'>
+            <div style={{marginRight: '30px', marginTop: '7px'}}>
+            <PacMan  />  
+            </div>
+
+          <div>
           Acesse a Pokedex
+          </div>
+
+        <div className='inverter' style={{marginLeft: '30px', marginTop: '7px'}}>
+          <PacMan  />  
+        </div>
+ 
+          </div>
+
         </Link>
       </header>
     </div>

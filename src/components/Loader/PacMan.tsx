@@ -1,8 +1,7 @@
 import React, { CSSProperties }  from 'react'
-import PulseLoader from 'react-spinners/PulseLoader';
+import PacmanLoader from 'react-spinners/PacmanLoader';
 
-
-const Pulse: React.FC = () => {
+const PacMan: React.FC = () => {
 
     const override: CSSProperties = {
         display: "block",
@@ -14,17 +13,14 @@ const Pulse: React.FC = () => {
 
     return (
         <div style={{display: "flex", flexWrap:"wrap", alignContent:"center"}}>    
-      <PulseLoader
+      <PacmanLoader
         color='#d63636'
-        loading={true}
-        cssOverride={override}
-        size={40}
-        aria-label="Loading Spinner"
-        data-testid="loader"
+        size={10}
+
       />
         </div>
   
 
     )
 }
-export default Pulse
+export default PacMan

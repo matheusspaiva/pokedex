@@ -6,15 +6,19 @@ import SectionInfo from './components/selectTypes'
 import PokeInfo from './types'
 import './index.css';
 import { FaArrowLeft, FaArrowRight, FaRegWindowClose } from "react-icons/fa";
+import Ring from '../../components/Loader/Ring'
 
 const PokeInforamacoes: React.FC = () => {
 
     const [info, setInfo ] = useState<PokeInfo>()
     const [img, setImg ] = useState<string[]>([])
     const {id} = useParams<string>()
-    const [erro, setErro ] = useState<string | null>(null)
+    const [erro, setErro ] = useState<string | null>('')
+    const [load, setLoad] = useState<boolean>(true)
+
     useEffect(() => {
 
+        setLoad(true)
         fetch(`https://pokeapi.co/api/v2/pokemon/${id}`).then(response =>{
             return response.json();
               }).then((data : PokeInfo) =>
@@ -28,24 +32,19 @@ const PokeInforamacoes: React.FC = () => {
                     data.sprites.front_shiny_female, data.sprites.back_shiny_female
                     ]
              
-                    // for (const key in data.sprites) {
-                //     const tipo = typeof (data.sprites as any)[key]
-                //     console.log(tipo)
-                //     if(tipo === 'string'){
-                //         images.push((data.sprites as any)[key])
-                //     }
-                // }
 
                 setImg(images?.filter(x=> x !== null && x.length>0))
           }).catch(() => {
                 setErro('OPS ... POKEMON NÃO ENCONTRADO')
           })
 
-    }, [id, setImg, setErro])
+          setLoad(false)
+    }, [id, setImg, setErro, setLoad])
 
     return (
 
         <>
+        {load && <Ring/>}
         {erro && <h1>{erro} <p className='paragrafo-link' onClick={()=> window.history.back()}> CLIQUE AQUI PARA RETORNAR</p></h1>}
         {info && erro===null &&
         <>

@@ -1,8 +1,8 @@
 import React, { CSSProperties }  from 'react'
-import PulseLoader from 'react-spinners/PulseLoader';
+import RingLoader from 'react-spinners/RingLoader';
 
 
-const Pulse: React.FC = () => {
+const Ring: React.FC = () => {
 
     const override: CSSProperties = {
         display: "block",
@@ -14,11 +14,11 @@ const Pulse: React.FC = () => {
 
     return (
         <div style={{display: "flex", flexWrap:"wrap", alignContent:"center"}}>    
-      <PulseLoader
+      <RingLoader
         color='#d63636'
         loading={true}
         cssOverride={override}
-        size={40}
+        size={100}
         aria-label="Loading Spinner"
         data-testid="loader"
       />
@@ -27,4 +27,4 @@ const Pulse: React.FC = () => {
 
     )
 }
-export default Pulse
+export default Ring
