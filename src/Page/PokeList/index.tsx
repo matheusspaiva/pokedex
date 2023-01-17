@@ -52,14 +52,14 @@ const PokeList: React.FC = () => {
             </div>
             <div>
             <Select  id="demo-simple-select" value={gen}  onChange={(e) => setGen(Number(e.target.value))}>
-                <MenuItem value={1}>1 Geração</MenuItem>
-                <MenuItem value={2}>2 Geração</MenuItem>
-                <MenuItem value={3}>3 Geração</MenuItem>
-                <MenuItem value={4}>4 Geração</MenuItem>
-                <MenuItem value={5}>5 Geração</MenuItem>
-                <MenuItem value={6}>6 Geração</MenuItem>
-                <MenuItem value={7}>7 Geração</MenuItem>
-                <MenuItem value={8}>8 Geração</MenuItem>
+                <MenuItem value={1}>1ª Geração - Kanto</MenuItem>
+                <MenuItem value={2}>2ª Geração - Johto</MenuItem>
+                <MenuItem value={3}>3ª Geração - Hoenn</MenuItem>
+                <MenuItem value={4}>4ª Geração - Sinnoh</MenuItem>
+                <MenuItem value={5}>5ª Geração - Unova</MenuItem>
+                <MenuItem value={6}>6ª Geração - Kalos</MenuItem>
+                <MenuItem value={7}>7ª Geração - Alola</MenuItem>
+                <MenuItem value={8}>8ª Geração - Galar</MenuItem>
             </Select>
   </div>
             </div>
