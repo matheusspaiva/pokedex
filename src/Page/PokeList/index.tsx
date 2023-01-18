@@ -6,14 +6,23 @@ import TextField from '@mui/material/TextField';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import Pulse from '../../components/Loader/Pulse';
+import { Button, Menu } from '@mui/material';
+import { Modal } from '../../components/Modal/Modal';
+import { useModal } from '../../components/Modal/useModal';
 
 const PokeList: React.FC = () => {
 
     const [listaPoke, setListaPoke] = useState<pokemomLista[]>()
+    const [berries, setBerry] = useState<pokemomLista[]>()
     const [listaPokeFilter, setListaPokeFilter] = useState<pokemomLista[]>()
     const [gen, setGen] = useState<number>(1)
     const [load, setLoad] = useState<boolean>(true)
 
+    const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+    const open = Boolean(anchorEl);
+
+    const { isShown, toggle, setIsShown } = useModal();
+    
     useEffect(() => {
         setLoad(true)
         let valueUrl = ''
@@ -44,8 +53,32 @@ const PokeList: React.FC = () => {
             
     }
 
+    function showBerris(){
+
+        //https://www.serebii.net/itemdex/sprites/pgl/magoberry.png
+        fetch("https://pokeapi.co/api/v2/berry/?offset=0&limit=100").then(response => {
+            return response.json();
+        }).then(data => {
+            setBerry(data.results)
+
+        })
+        setAnchorEl(null);
+        setIsShown(true)
+    }
+
+    const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+        setAnchorEl(event.currentTarget);
+      };
+
     return (
         <>
+
+<Modal isShown={isShown} hide={toggle} modalContent={<>
+    {berries && berries?.map((i, index)=>
+    <img src={`https://www.serebii.net/itemdex/sprites/pgl/${i.name}berry.png`}/>
+    )}
+        </>} headerText={"SPRITS"} />
+
             <div className='header'>
             <div className='span'> 
             <TextField id="outlined-basic" onChange={(e) => handleSearchName(e.target.value)}  label="PESQUISAR ..." variant="filled" />
@@ -62,6 +95,29 @@ const PokeList: React.FC = () => {
                 <MenuItem value={8}>8ª Geração - Galar</MenuItem>
             </Select>
   </div>
+  <div>
+  <Button
+        id="basic-button"
+        aria-controls={open ? 'basic-menu' : undefined}
+        aria-haspopup="true"
+        aria-expanded={open ? 'true' : undefined}
+        onClick={handleClick}
+      >
+        Extras
+      </Button>
+      <Menu
+        id="basic-menu"
+        anchorEl={anchorEl}
+        open={open}
+        onClose={() => setAnchorEl(null)}
+        MenuListProps={{
+          'aria-labelledby': 'basic-button',
+        }}
+      >
+        <MenuItem onClick={showBerris}>Berries</MenuItem>
+
+      </Menu>
+    </div>
             </div>
             <div>
            {load && <Pulse/>}
