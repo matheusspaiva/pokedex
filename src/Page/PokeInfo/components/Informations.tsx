@@ -20,13 +20,13 @@ const Informations: React.FC<{info:PokeInfo}> = ({info}) => {
                 </div>
             </div>
             <div className="move-box" style={{backgroundColor:"gray", marginTop:"10px"}}>
-                <label>Moviemtos : </label>
+                <label>Movimentos : </label>
                 {info.moves.slice(0,4).map(item=>
                     <div key={item.move.name}>
                     {item.move.name}
                     </div>
                     )}
-                   <div onClick={()=> setIsShown(true)}> ... </div>
+                   <div className="extra-moves" onClick={()=> setIsShown(true)}><p>. . .</p> </div>
             </div>
 
             </>
