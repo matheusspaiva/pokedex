@@ -49,14 +49,14 @@
     text-transform: uppercase;
 }
 
-.box-fruit {
+.box-item {
     display: flex;
     flex-Wrap: wrap;
     align-Content: center;
     flex-direction: row;
 }
 
-.fruit {
+.item {
     display: flex;
     border: 2px solid black;
     padding: 5px;
@@ -64,4 +64,15 @@
     border-Radius: 10px;
     background-color: #8b7d7d;
     flex-direction: row;
+}
+
+.list-extra{
+    background: #fff;
+    border: 2px solid black;
+    margin-left: 60%;
+    display: flex;
+}
+
+#extra-button{
+    color: red;
 }

@@ -85,7 +85,6 @@ const PokeList: React.FC = () => {
     };
 
     const handleName = (name : string) => {
-        console.log('oi')
         const doc = document.getElementById(name)
         if(doc)doc.style.display = 'none'
     };
@@ -94,9 +93,9 @@ const PokeList: React.FC = () => {
         <>
 
             <Modal isShown={isShown && items.length > 0} hide={toggle} modalContent={<>
-                <div className='box-fruit'>
+                <div className='box-item'>
                     {items && items?.map((i, index) =>
-                        <div  id={`${i.name}`} key={index} className='fruit'>
+                        <div  id={`${i.name}`} key={index} className='item'>
                             <img  onError={()=>handleName(i.name) } alt={i.name} src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/${i.name}.png`} />
                             <p>{i.name}</p>
                         </div>
@@ -107,9 +106,9 @@ const PokeList: React.FC = () => {
             </>} headerText={"ITEMS"} />
 
             <Modal isShown={isShown && berries.length > 0} hide={toggle} modalContent={<>
-                <div className='box-fruit'>
+                <div className='box-item'>
                     {berries && berries?.map((i, index) =>
-                        <div className='fruit'>
+                        <div className='item'>
                             <img alt={i.name} src={`https://www.serebii.net/itemdex/sprites/pgl/${i.name}berry.png`} />
                             <p>{i.name} Berry</p>
                         </div>
@@ -135,9 +134,9 @@ const PokeList: React.FC = () => {
                         <MenuItem value={8}>8ª Geração - Galar</MenuItem>
                     </Select>
                 </div>
-                <div>
+                <div className='list-extra'>
                     <Button
-                        id="basic-button"
+                        id="extra-button"
                         aria-controls={open ? 'basic-menu' : undefined}
                         aria-haspopup="true"
                         aria-expanded={open ? 'true' : undefined}

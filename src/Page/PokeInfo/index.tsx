@@ -50,21 +50,21 @@ const PokeInforamacoes: React.FC = () => {
         <>
         <div className='container'>
         <div>
-        <Link className='circle-buttom' to={`/pokedex/Pokemons/${Number(id)-1}`}>
+        <Link className='circle-button' to={`/pokedex/Pokemons/${Number(id)-1}`}>
         <FaArrowLeft />
             </Link>
         </div>
             <div className='box'> 
          <div className='title-box'>
             <p className='title-card'>{info?.name}</p>
-            <Link to={'/pokedex/Pokemons'} className='tile-buttom'> <h2><FaRegWindowClose /></h2></Link>
+            <Link to={'/pokedex/Pokemons'} className='tile-button'> <h2><FaRegWindowClose /></h2></Link>
          </div>
              <ImageInfo numero={id} images={img} />
              <SectionInfo tipos={info?.types!}/>
              <Informations info={info!}/>
              </div>
              <div >
-             <Link className='circle-buttom' to={`/pokedex/Pokemons/${Number(id)+1}`}>
+             <Link className='circle-button' to={`/pokedex/Pokemons/${Number(id)+1}`}>
         <FaArrowRight />
             </Link>
              </div>
