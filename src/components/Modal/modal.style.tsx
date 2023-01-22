@@ -25,6 +25,7 @@ export const StyledModal = styled.div`
   background: white;
   position: relative;
   margin: auto;
+  border: 4px solid #d63636;
   border-radius: 8px;
 `;
 
@@ -41,7 +42,7 @@ export const HeaderText = styled.div`
 `;
 
 export const CloseButton = styled.button`
-  font-size: 0.8rem;
+  font-size: 1rem;
   border: none;
   border-radius: 3px;
   margin-left: 0.5rem;
@@ -49,6 +50,7 @@ export const CloseButton = styled.button`
   :hover {
     cursor: pointer;
   }
+  color: red;
 `;
 
 export const Content = styled.div`

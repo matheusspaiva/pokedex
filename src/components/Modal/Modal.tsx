@@ -1,5 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import ReactDOM from 'react-dom';
+import { FaRegWindowClose } from 'react-icons/fa';
 
 import {
   Wrapper,
@@ -26,12 +27,12 @@ export const Modal: FunctionComponent<ModalProps> = ({
 }) => {
   const modal = (
     <React.Fragment>
-      <Backdrop />
+      <Backdrop  onClick={hide} />
       <Wrapper>
         <StyledModal>
           <Header>
             <HeaderText>{headerText}</HeaderText>
-            <CloseButton onClick={hide}>X</CloseButton>
+            <CloseButton onClick={hide}><FaRegWindowClose /></CloseButton>
           </Header>
           <Content>{modalContent}</Content>
         </StyledModal>

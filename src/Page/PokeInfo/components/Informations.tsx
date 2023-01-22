@@ -26,7 +26,7 @@ const Informations: React.FC<{info:PokeInfo}> = ({info}) => {
                     {item.move.name}
                     </div>
                     )}
-                   <div className="extra-moves" onClick={()=> setIsShown(true)}><p>. . .</p> </div>
+                <p className="extra-moves" onClick={()=> setIsShown(true)}>. . .</p>  
             </div>
 
             </>
