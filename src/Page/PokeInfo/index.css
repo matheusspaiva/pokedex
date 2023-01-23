@@ -13,13 +13,13 @@
     align-items: center;
 }
 
-.tile-button{
+.tile-button {
     position: relative;
     left: 90px;
 
 }
 
-.title-card{
+.title-card {
     text-Align: center;
     margin-Top: 10px;
     padding: 5px;
@@ -83,23 +83,23 @@
     border-radius: 5px;
 }
 
-.circle-button{
+.circle-button {
     border: 2px solid black;
     margin: 20px;
-    padding: 20px; 
+    padding: 20px;
     border-radius: 100%;
     background-color: #d63636;
     cursor: pointer;
 }
 
-.paragrafo-link{
+.paragrafo-link {
     cursor: pointer;
     color: blue;
     text-decoration: underline;
     font-size: 20px;
 }
 
-.extra-moves{
+.extra-moves {
     border: 2px solid black;
     border-radius: 5px;
     width: 12%;
@@ -109,4 +109,22 @@
     color: #1c1cd1;
     background-color: #d63636;
     font-weight: bolder;
+}
+
+#menu{
+    display: flex;
+    flex-direction: row;
+
+}
+
+.column-type{
+    display: flex;
+    flex-direction: column;
+    border: 2px solid black;
+    border-radius: 10px;
+    margin: 2px;
+}
+
+.type-text{
+    color: red;
 }
