@@ -46,8 +46,9 @@ const Informations: React.FC<{ info: PokeInfo }> = ({ info }) => {
             </div>
             <Modal isShown={isShown &&statusShow} hide={toggle} modalContent={<>
                 {info.stats.map(item =>
-                    < div key={item.stat.name}>
-                      {item.stat.name} <ProgressBar variant="danger" max={255} now={item.base_stat} label={`${item.base_stat}`}/>  
+                    <div key={item.stat.name} className="status-box">
+                      {item.stat.name}
+                      <ProgressBar variant="danger" max={255} now={item.base_stat} label={`${item.base_stat}`}/>  
                     </div>
                 )}
             </>} headerText={"Status basico"} />
