@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import getIndex from '../../../scripts/getIndex'
 import pokemomLista from '../types'
 import './../index.css';
+import PokeImage from '../../../components/Image/PokeImage';
 
 const ListaPokemon: React.FC<{listaPoke: pokemomLista[]}> = ({listaPoke}) => {
 
@@ -16,7 +17,8 @@ const ListaPokemon: React.FC<{listaPoke: pokemomLista[]}> = ({listaPoke}) => {
         <div key={i.name} className='box-card'>
                 <Link to={`./${getIndex(i.url)}`}>
                     <div className='image-card'>
-                    <img alt={`${i.name}`} width={200}  src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${getIndex(i.url, true)}.png`} title={i.name}></img>
+                        <PokeImage pokemonId={Number(getIndex(i.url, true))} />
+                    
                     </div>
 
         <p className='name-card' >{`#${getIndex(i.url)} ${i.name}`}</p>     

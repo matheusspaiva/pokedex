@@ -9,6 +9,7 @@ import Pulse from '../../components/Loader/Pulse';
 import { Button, Menu } from '@mui/material';
 import { Modal } from '../../components/Modal/Modal';
 import { useModal } from '../../components/Modal/useModal';
+import { pokeApi } from '../../api/pokeApi';
 
 const PokeList: React.FC = () => {
 
@@ -25,28 +26,29 @@ const PokeList: React.FC = () => {
     const { isShown, toggle, setIsShown } = useModal();
 
     useEffect(() => {
-        setLoad(true)
-        let valueUrl = ''
-        if (gen === 1) valueUrl = 'https://pokeapi.co/api/v2/pokemon/?offset=0&limit=151'
-        if (gen === 2) valueUrl = 'https://pokeapi.co/api/v2/pokemon/?offset=151&limit=100'
-        if (gen === 3) valueUrl = 'https://pokeapi.co/api/v2/pokemon/?offset=251&limit=135'
-        if (gen === 4) valueUrl = 'https://pokeapi.co/api/v2/pokemon/?offset=386&limit=107'
-        if (gen === 5) valueUrl = 'https://pokeapi.co/api/v2/pokemon/?offset=493&limit=156'
-        if (gen === 6) valueUrl = 'https://pokeapi.co/api/v2/pokemon/?offset=649&limit=72'
-        if (gen === 7) valueUrl = 'https://pokeapi.co/api/v2/pokemon/?offset=721&limit=88'
-        if (gen === 8) valueUrl = 'https://pokeapi.co/api/v2/pokemon/?offset=809&limit=95'
-        if (gen === 9) valueUrl = 'https://pokeapi.co/api/v2/pokemon/?offset=905&limit=101'
-
-        //https://assets.pokemon.com/assets/cms2/img/pokedex/full/001.png
-        fetch(valueUrl).then(response => {
-            return response.json();
-        }).then(data => {
-            setListaPokeFilter(data.results)
-            setListaPoke(data.results)
-            setLoad(false)
-        })
+        loadData()
     }, [gen, setLoad])
 
+    async function loadData(){
+        setLoad(true)
+        let valueUrl = ''
+        if (gen === 1) valueUrl = '/pokemon/?offset=0&limit=151'
+        if (gen === 2) valueUrl = '/pokemon/?offset=151&limit=100'
+        if (gen === 3) valueUrl = '/pokemon/?offset=251&limit=135'
+        if (gen === 4) valueUrl = '/pokemon/?offset=386&limit=107'
+        if (gen === 5) valueUrl = '/pokemon/?offset=493&limit=156'
+        if (gen === 6) valueUrl = '/pokemon/?offset=649&limit=72'
+        if (gen === 7) valueUrl = '/pokemon/?offset=721&limit=88'
+        if (gen === 8) valueUrl = '/pokemon/?offset=809&limit=95'
+        if (gen === 9) valueUrl = '/pokemon/?offset=905&limit=101'
+
+        //https://assets.pokemon.com/assets/cms2/img/pokedex/full/001.png
+
+        const response = await pokeApi.get(valueUrl)
+            setListaPokeFilter(response.data.results)
+            setListaPoke(response.data.results)
+            setLoad(false)
+    }
     function handleSearchName(value: string) {
 
         if (value.length === 0) setListaPokeFilter(listaPoke)
@@ -54,28 +56,25 @@ const PokeList: React.FC = () => {
 
     }
 
-    function showBerris() {
+    async function showBerris() {
         setItems([])
-        fetch("https://pokeapi.co/api/v2/berry/?offset=0&limit=100").then(response => {
-            return response.json();
-        }).then(data => {
-            setBerry(data.results)
 
-        })
+        const response = await pokeApi.get('/berry/?offset=0&limit=100')
+
+        const list = response.data.results
+       setBerry(list)
         setAnchorEl(null);
         setIsShown(true)
     }
 
-    function showItems() {
+    async function showItems() {
         setBerry([])
 
-        //https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/master-ball.png
-        fetch("https://pokeapi.co/api/v2/item/?offset=0&limit=1000").then(response => {
-            return response.json();
-        }).then(data => {
-            setItems(data.results)
 
-        })
+                const response = await pokeApi.get('/item/?offset=0&limit=1000')
+
+        const list = response.data.results
+       setBerry(list)
         setAnchorEl(null);
         setIsShown(true)
     }

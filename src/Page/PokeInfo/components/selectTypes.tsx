@@ -4,7 +4,7 @@ import { useModal } from "../../../components/Modal/useModal";
 import { ITypeDetail } from "../ITypeDetail";
 import getTipo from "../scripts/getTipo"
 import Type from "../types"
-import './../index.css';
+import './../styles/index.css';
 
 const SectionInfo: React.FC<{ tipos: Type[] }> = ({ tipos }) => {
 

@@ -4,9 +4,13 @@ import ImageInfo from './components/ImageInfo'
 import Informations from './components/Informations'
 import SectionInfo from './components/selectTypes'
 import PokeInfo from './types'
-import './index.css';
+import './styles/index.css';
 import { FaArrowLeft, FaArrowRight, FaRegWindowClose } from "react-icons/fa";
 import Ring from '../../components/Loader/Ring'
+import { pokeApi } from '../../api/pokeApi'
+import { PokeSpecie, Variety } from './types/PokeSpecie'
+import FormsPoke from './components/Forms'
+import { PokemonStats } from './components/PokemonStats'
 
 const PokeInforamacoes: React.FC = () => {
 
@@ -15,15 +19,25 @@ const PokeInforamacoes: React.FC = () => {
     const {id} = useParams<string>()
     const [erro, setErro ] = useState<string | null>('')
     const [load, setLoad] = useState<boolean>(true)
-
+    const [varieties, setVarities] = useState<Variety[]>([])
     useEffect(() => {
 
+        loadData()
+
+
+    }, [id, setImg, setErro, setLoad])
+
+
+    async function loadData(){
         setLoad(true)
-        fetch(`https://pokeapi.co/api/v2/pokemon/${id}`).then(response =>{
-            return response.json();
-              }).then((data : PokeInfo) =>
-              {
-                setErro(null)
+
+        try {
+
+            await loadSpecies()
+        const response = await pokeApi.get<PokeInfo>(`/pokemon/${id}`)
+        const data = response.data 
+
+         setErro(null)
                 setInfo(data)
                 const images :string[]= [
                     data.sprites.front_default, data.sprites.back_default, 
@@ -34,13 +48,29 @@ const PokeInforamacoes: React.FC = () => {
              
 
                 setImg(images?.filter(x=> x !== null && x.length>0))
-          }).catch(() => {
-                setErro('OPS ... POKEMON NÃO ENCONTRADO')
-          })
+            
+        } catch (error) {
+            setErro('OPS ... POKEMON NÃO ENCONTRADO')
+        }
 
-          setLoad(false)
-    }, [id, setImg, setErro, setLoad])
+    setLoad(false)
+    }
 
+    async function  loadSpecies() {
+
+        try{
+        const response = await pokeApi.get<PokeSpecie>(`/pokemon-species/${id}`)
+        const data = response.data 
+        
+        //verificação de formas
+
+        const pokeforms = data.varieties.filter(x=> x.is_default === false)
+
+        setVarities(pokeforms)
+        }catch{
+
+        }
+    }
     return (
 
         <>
@@ -59,9 +89,14 @@ const PokeInforamacoes: React.FC = () => {
             <p className='title-card'>{info?.name}</p>
             <Link to={'/pokedex/Pokemons'} className='tile-button'> <h2><FaRegWindowClose /></h2></Link>
          </div>
-             <ImageInfo numero={id} images={img} />
+             <ImageInfo numero={(id)} images={img} />
              <SectionInfo tipos={info?.types!}/>
+             <FormsPoke forms={varieties} / >
              <Informations info={info!}/>
+             <PokemonStats stats={info.stats.map(x => ({
+                base_stat: x.base_stat,
+                name: x.stat.name
+             }))} />
              </div>
              <div >
              <Link className='circle-button' to={`/pokedex/Pokemons/${Number(id)+1}`}>

@@ -4,7 +4,7 @@ import { FaChartBar } from "react-icons/fa";
 import { Modal } from "../../../components/Modal/Modal";
 import { useModal } from "../../../components/Modal/useModal";
 import PokeInfo from "../types"
-import './../index.css';
+import './../styles/index.css';
 
 const Informations: React.FC<{ info: PokeInfo }> = ({ info }) => {
     const { isShown, toggle, setIsShown } = useModal();
@@ -31,15 +31,7 @@ const Informations: React.FC<{ info: PokeInfo }> = ({ info }) => {
                             </div>
 
                         </div>
-                        <div className="move-box" style={{ backgroundColor: "gray", marginTop: "10px" }}>
-                            <label>Movimentos : </label>
-                            {info.moves.slice(0, 4).map(item =>
-                                <div key={item.move.name}>
-                                    {item.move.name}
-                                </div>
-                            )}
-                            <p className="extra-moves" onClick={() => {setIsShown(true); setInfoShow(true); setStatusShow(false)}}>. . .</p>
-                        </div>
+                        
 
                     </>
                 }
