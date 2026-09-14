@@ -1,9 +1,6 @@
 import { useEffect, useState } from "react";
-import { ProgressBar } from "react-bootstrap";
-import { FaChartBar } from "react-icons/fa";
 import { Modal } from "../../../components/Modal/Modal";
 import { useModal } from "../../../components/Modal/useModal";
-import PokeInfo from "../types"
 import './../styles/index.css';
 import { Variety } from "../types/PokeSpecie";
 import PokeImage from "../../../components/Image/PokeImage";

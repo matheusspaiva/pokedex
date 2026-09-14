@@ -27,7 +27,7 @@ const PokeList: React.FC = () => {
 
     useEffect(() => {
         loadData()
-    }, [gen, setLoad])
+    }, [gen, setLoad, loadData])
 
     async function loadData(){
         setLoad(true)

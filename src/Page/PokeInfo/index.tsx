@@ -25,7 +25,7 @@ const PokeInforamacoes: React.FC = () => {
         loadData()
 
 
-    }, [id, setImg, setErro, setLoad])
+    }, [id, setImg, setErro, setLoad, loadData])
 
 
     async function loadData(){
