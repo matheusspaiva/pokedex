@@ -1,18 +1,18 @@
-import React, { useEffect, useState } from 'react'
+
+import React, { useCallback, useEffect, useState } from 'react'
 import ListaPokemon from './Components/listaPokemon'
 import pokemomLista from './types'
-import './index.css';
-import TextField from '@mui/material/TextField';
-import Select from '@mui/material/Select';
-import MenuItem from '@mui/material/MenuItem';
-import Pulse from '../../components/Loader/Pulse';
-import { Button, Menu } from '@mui/material';
-import { Modal } from '../../components/Modal/Modal';
-import { useModal } from '../../components/Modal/useModal';
-import { pokeApi } from '../../api/pokeApi';
+import './index.css'
+import TextField from '@mui/material/TextField'
+import Select from '@mui/material/Select'
+import MenuItem from '@mui/material/MenuItem'
+import Pulse from '../../components/Loader/Pulse'
+import { Button, Menu } from '@mui/material'
+import { Modal } from '../../components/Modal/Modal'
+import { useModal } from '../../components/Modal/useModal'
+import { pokeApi } from '../../api/pokeApi'
 
 const PokeList: React.FC = () => {
-
     const [listaPoke, setListaPoke] = useState<pokemomLista[]>()
     const [berries, setBerry] = useState<pokemomLista[]>([])
     const [items, setItems] = useState<pokemomLista[]>([])
@@ -20,18 +20,16 @@ const PokeList: React.FC = () => {
     const [gen, setGen] = useState<number>(1)
     const [load, setLoad] = useState<boolean>(true)
 
-    const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-    const open = Boolean(anchorEl);
+    const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
+    const open = Boolean(anchorEl)
 
-    const { isShown, toggle, setIsShown } = useModal();
+    const { isShown, toggle, setIsShown } = useModal()
 
-    useEffect(() => {
-        loadData()
-    }, [gen, setLoad, loadData])
-
-    async function loadData(){
+    const loadData = useCallback(async () => {
         setLoad(true)
+
         let valueUrl = ''
+
         if (gen === 1) valueUrl = '/pokemon/?offset=0&limit=151'
         if (gen === 2) valueUrl = '/pokemon/?offset=151&limit=100'
         if (gen === 3) valueUrl = '/pokemon/?offset=251&limit=135'
@@ -42,18 +40,29 @@ const PokeList: React.FC = () => {
         if (gen === 8) valueUrl = '/pokemon/?offset=809&limit=95'
         if (gen === 9) valueUrl = '/pokemon/?offset=905&limit=101'
 
-        //https://assets.pokemon.com/assets/cms2/img/pokedex/full/001.png
+        // https://assets.pokemon.com/assets/cms2/img/pokedex/full/001.png
 
         const response = await pokeApi.get(valueUrl)
-            setListaPokeFilter(response.data.results)
-            setListaPoke(response.data.results)
-            setLoad(false)
-    }
+
+        setListaPokeFilter(response.data.results)
+        setListaPoke(response.data.results)
+        setLoad(false)
+    }, [gen])
+
+    useEffect(() => {
+        loadData()
+    }, [loadData])
+
     function handleSearchName(value: string) {
-
-        if (value.length === 0) setListaPokeFilter(listaPoke)
-        else setListaPokeFilter(listaPoke?.filter(x => x.name.toUpperCase().includes(value.toUpperCase())))
-
+        if (value.length === 0) {
+            setListaPokeFilter(listaPoke)
+        } else {
+            setListaPokeFilter(
+                listaPoke?.filter(x =>
+                    x.name.toUpperCase().includes(value.toUpperCase())
+                )
+            )
+        }
     }
 
     async function showBerris() {
@@ -62,109 +71,196 @@ const PokeList: React.FC = () => {
         const response = await pokeApi.get('/berry/?offset=0&limit=100')
 
         const list = response.data.results
-       setBerry(list)
-        setAnchorEl(null);
+
+        setBerry(list)
+        setAnchorEl(null)
         setIsShown(true)
     }
 
     async function showItems() {
         setBerry([])
 
-
-                const response = await pokeApi.get('/item/?offset=0&limit=1000')
+        const response = await pokeApi.get('/item/?offset=0&limit=1000')
 
         const list = response.data.results
-       setBerry(list)
-        setAnchorEl(null);
+
+        setBerry(list)
+        setAnchorEl(null)
         setIsShown(true)
     }
 
-    const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-        setAnchorEl(event.currentTarget);
-    };
+    const handleClick = (
+        event: React.MouseEvent<HTMLButtonElement>
+    ) => {
+        setAnchorEl(event.currentTarget)
+    }
 
-    const handleName = (name : string) => {
+    const handleName = (name: string) => {
         const doc = document.getElementById(name)
-        if(doc)doc.style.display = 'none'
-    };
+
+        if (doc) {
+            doc.style.display = 'none'
+        }
+    }
 
     return (
         <>
+            <Modal
+                isShown={isShown && items.length > 0}
+                hide={toggle}
+                modalContent={
+                    <>
+                        <div className="box-item">
+                            {items &&
+                                items.map((i, index) => (
+                                    <div
+                                        id={`${i.name}`}
+                                        key={index}
+                                        className="item"
+                                    >
+                                        <img
+                                            onError={() =>
+                                                handleName(i.name)
+                                            }
+                                            alt={i.name}
+                                            src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/${i.name}.png`}
+                                        />
 
-            <Modal isShown={isShown && items.length > 0} hide={toggle} modalContent={<>
-                <div className='box-item'>
-                    {items && items?.map((i, index) =>
-                        <div  id={`${i.name}`} key={index} className='item'>
-                            <img  onError={()=>handleName(i.name) } alt={i.name} src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/${i.name}.png`} />
-                            <p>{i.name}</p>
+                                        <p>{i.name}</p>
+                                    </div>
+                                ))}
                         </div>
+                    </>
+                }
+                headerText="ITEMS"
+            />
 
-                    )}
-                </div>
+            <Modal
+                isShown={isShown && berries.length > 0}
+                hide={toggle}
+                modalContent={
+                    <>
+                        <div className="box-item">
+                            {berries &&
+                                berries.map((i, index) => (
+                                    <div
+                                        key={index}
+                                        className="item"
+                                    >
+                                        <img
+                                            alt={i.name}
+                                            src={`https://www.serebii.net/itemdex/sprites/pgl/${i.name}berry.png`}
+                                        />
 
-            </>} headerText={"ITEMS"} />
-
-            <Modal isShown={isShown && berries.length > 0} hide={toggle} modalContent={<>
-                <div className='box-item'>
-                    {berries && berries?.map((i, index) =>
-                        <div className='item'>
-                            <img alt={i.name} src={`https://www.serebii.net/itemdex/sprites/pgl/${i.name}berry.png`} />
-                            <p>{i.name} Berry</p>
+                                        <p>{i.name} Berry</p>
+                                    </div>
+                                ))}
                         </div>
+                    </>
+                }
+                headerText="Berries"
+            />
 
-                    )}
+            <div className="header">
+                <div className="span">
+                    <TextField
+                        id="outlined-basic"
+                        onChange={e =>
+                            handleSearchName(e.target.value)
+                        }
+                        label="PESQUISAR ..."
+                        variant="filled"
+                    />
                 </div>
 
-            </>} headerText={"Berries"} />
-
-            <div className='header'>
-                <div className='span'>
-                    <TextField id="outlined-basic" onChange={(e) => handleSearchName(e.target.value)} label="PESQUISAR ..." variant="filled" />
-                </div>
                 <div>
-                    <Select id="demo-simple-select" value={gen} onChange={(e) => setGen(Number(e.target.value))}>
-                        <MenuItem value={1}>1ª Geração - Kanto</MenuItem>
-                        <MenuItem value={2}>2ª Geração - Johto</MenuItem>
-                        <MenuItem value={3}>3ª Geração - Hoenn</MenuItem>
-                        <MenuItem value={4}>4ª Geração - Sinnoh</MenuItem>
-                        <MenuItem value={5}>5ª Geração - Unova</MenuItem>
-                        <MenuItem value={6}>6ª Geração - Kalos</MenuItem>
-                        <MenuItem value={7}>7ª Geração - Alola</MenuItem>
-                        <MenuItem value={8}>8ª Geração - Galar</MenuItem>
+                    <Select
+                        id="demo-simple-select"
+                        value={gen}
+                        onChange={e =>
+                            setGen(Number(e.target.value))
+                        }
+                    >
+                        <MenuItem value={1}>
+                            1ª Geração - Kanto
+                        </MenuItem>
+
+                        <MenuItem value={2}>
+                            2ª Geração - Johto
+                        </MenuItem>
+
+                        <MenuItem value={3}>
+                            3ª Geração - Hoenn
+                        </MenuItem>
+
+                        <MenuItem value={4}>
+                            4ª Geração - Sinnoh
+                        </MenuItem>
+
+                        <MenuItem value={5}>
+                            5ª Geração - Unova
+                        </MenuItem>
+
+                        <MenuItem value={6}>
+                            6ª Geração - Kalos
+                        </MenuItem>
+
+                        <MenuItem value={7}>
+                            7ª Geração - Alola
+                        </MenuItem>
+
+                        <MenuItem value={8}>
+                            8ª Geração - Galar
+                        </MenuItem>
                     </Select>
                 </div>
-                <div className='list-extra'>
+
+                <div className="list-extra">
                     <Button
                         id="extra-button"
-                        aria-controls={open ? 'basic-menu' : undefined}
+                        aria-controls={
+                            open ? 'basic-menu' : undefined
+                        }
                         aria-haspopup="true"
-                        aria-expanded={open ? 'true' : undefined}
+                        aria-expanded={
+                            open ? 'true' : undefined
+                        }
                         onClick={handleClick}
                     >
                         Extras
                     </Button>
+
                     <Menu
                         id="basic-menu"
                         anchorEl={anchorEl}
                         open={open}
                         onClose={() => setAnchorEl(null)}
                         MenuListProps={{
-                            'aria-labelledby': 'basic-button',
+                            'aria-labelledby': 'basic-button'
                         }}
                     >
-                        <MenuItem onClick={showBerris}>Berries</MenuItem>
-                        <MenuItem onClick={showItems}>Items</MenuItem>
+                        <MenuItem onClick={showBerris}>
+                            Berries
+                        </MenuItem>
+
+                        <MenuItem onClick={showItems}>
+                            Items
+                        </MenuItem>
                     </Menu>
                 </div>
             </div>
+
             <div>
                 {load && <Pulse />}
-                {!load && <ListaPokemon listaPoke={listaPokeFilter!} />}
 
+                {!load && (
+                    <ListaPokemon
+                        listaPoke={listaPokeFilter!}
+                    />
+                )}
             </div>
-
         </>
-
     )
 }
+
 export default PokeList
