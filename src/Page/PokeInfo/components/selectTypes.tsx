@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { Modal } from "../../../components/Modal/Modal";
 import { useModal } from "../../../components/Modal/useModal";
-import { ITypeDetail } from "../ITypeDetail";
+import { ITypeDetail } from "../types/ITypeDetail";
 import getTipo from "../scripts/getTipo"
-import Type from "../types"
+import {Type} from "../types/PokeInfo"
 import './../styles/index.css';
 
-const SectionInfo: React.FC<{ tipos: Type[] }> = ({ tipos }) => {
+const SelectTypeSection: React.FC<{ tipos: Type[] }> = ({ tipos }) => {
 
     const [iTipo, setTipo] = useState<ITypeDetail | null>(null)
     const { isShown, toggle, setIsShown } = useModal();
@@ -77,4 +77,4 @@ const SectionInfo: React.FC<{ tipos: Type[] }> = ({ tipos }) => {
     )
 }
 
-export default SectionInfo
+export default SelectTypeSection

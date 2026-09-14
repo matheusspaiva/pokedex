@@ -325,7 +325,7 @@ export default interface PokeInfo {
     url: string
   }
   
-  export default interface Type {
+  export  interface Type {
     slot: number
     type: Type2
   }

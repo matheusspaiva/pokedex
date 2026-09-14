@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { ProgressBar } from "react-bootstrap";
-import { FaChartBar } from "react-icons/fa";
 import { Modal } from "../../../components/Modal/Modal";
 import { useModal } from "../../../components/Modal/useModal";
-import PokeInfo from "../types"
+import PokeInfo from "../types/PokeInfo"
 import './../styles/index.css';
+import SelectTypeSection from "./SelectTypes";
 
 const Informations: React.FC<{ info: PokeInfo }> = ({ info }) => {
     const { isShown, toggle, setIsShown } = useModal();
@@ -27,7 +27,7 @@ const Informations: React.FC<{ info: PokeInfo }> = ({ info }) => {
                                 </div>
                             </div>
                             <div className="info-stats" onClick={() => {setIsShown(true); setInfoShow(false); setStatusShow(true)}}>
-                                <h1><FaChartBar style={{color: 'red'}} /></h1>
+                              <SelectTypeSection tipos={info.types} />
                             </div>
 
                         </div>

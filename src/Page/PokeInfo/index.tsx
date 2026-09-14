@@ -1,12 +1,9 @@
 
 import React, { useCallback, useEffect, useState } from 'react'
-
 import { Link, useParams } from 'react-router-dom'
-
 import ImageInfo from './components/ImageInfo'
 import Informations from './components/Informations'
-import SectionInfo from './components/selectTypes'
-import PokeInfo from './types'
+import PokeInfo from './types/PokeInfo'
 import './styles/index.css'
 
 import { FaArrowLeft, FaArrowRight, FaRegWindowClose } from 'react-icons/fa'
@@ -137,9 +134,7 @@ const PokeInforamacoes: React.FC = () => {
                                 images={img}
                             />
 
-                            <SectionInfo
-                                tipos={info.types}
-                            />
+
 
                             <FormsPoke
                                 forms={varieties}
