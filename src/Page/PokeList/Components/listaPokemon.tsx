@@ -16,7 +16,7 @@ const ListaPokemon: React.FC<{listaPoke: pokemomLista[]}> = ({listaPoke}) => {
         <div key={i.name} className='box-card'>
                 <Link to={`./${getIndex(i.url)}`}>
                     <div className='image-card'>
-                    <img alt={`${i.name}`} width={200}  src={`https://assets.pokemon.com/assets/cms2/img/pokedex/full/${getIndex(i.url, true)}.png`} title={i.name}></img>
+                    <img alt={`${i.name}`} width={200}  src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${getIndex(i.url, true)}.png`} title={i.name}></img>
                     </div>
 
         <p className='name-card' >{`#${getIndex(i.url)} ${i.name}`}</p>     
