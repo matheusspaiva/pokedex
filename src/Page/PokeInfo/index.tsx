@@ -15,6 +15,9 @@ import { PokeSpecie, Variety } from './types/PokeSpecie'
 
 import FormsPoke from './components/Forms'
 import { PokemonStats } from './components/PokemonStats'
+import { IEvolutionChain } from './types/IEvolutionChain'
+import axios from 'axios'
+import EvolutionChain from './components/EvolutionChain'
 
 const PokeInforamacoes: React.FC = () => {
     const [info, setInfo] = useState<PokeInfo>()
@@ -23,6 +26,7 @@ const PokeInforamacoes: React.FC = () => {
     const [erro, setErro] = useState<string | null>('')
     const [load, setLoad] = useState<boolean>(true)
     const [varieties, setVarities] = useState<Variety[]>([])
+    const [chain, setChaint] = useState<IEvolutionChain|null>(null)
 
 
     const navigate = useNavigate()
@@ -40,8 +44,14 @@ const PokeInforamacoes: React.FC = () => {
             )
 
             setVarities(pokeforms)
+
+            const chainResponse = await axios.get(data.evolution_chain.url)
+
+            setChaint(chainResponse.data)
+
         } catch {
             setVarities([])
+            setChaint(null)
         }
     }, [id])
 
@@ -106,6 +116,7 @@ const PokeInforamacoes: React.FC = () => {
 
             {info && erro === null && (
                 <>
+                {chain && <EvolutionChain evolution={chain}/> }
                     <main className="pokemon-page">
                     <div className="container">
                         <div>
