@@ -40,7 +40,7 @@ const PokeList: React.FC = () => {
         if (gen === 6) valueUrl = '/pokemon/?offset=649&limit=72'
         if (gen === 7) valueUrl = '/pokemon/?offset=721&limit=88'
         if (gen === 8) valueUrl = '/pokemon/?offset=809&limit=95'
-        if (gen === 9) valueUrl = '/pokemon/?offset=905&limit=101'
+        if (gen === 9) valueUrl = '/pokemon/?offset=905&limit=120'
 
         // https://assets.pokemon.com/assets/cms2/img/pokedex/full/001.png
 
@@ -250,6 +250,10 @@ const PokeList: React.FC = () => {
 
                                 <MenuItem value={8}>
                                     8ª Geração - Galar
+                                </MenuItem>
+
+                                <MenuItem value={9}>
+                                    9ª Geração - Paldea
                                 </MenuItem>
                             </Select>
                         </div>
