@@ -1,12 +1,2 @@
-.item-carrossel{
-    display: block;
-    width: 700;
-
-}
-
-.box-carrossel{
-    display: block;
- 
-    padding: 30;
-    background-color: #313947;
-}
+.carousel-shell { display: block; width: min(100%, 360px); margin: auto; padding: 12px; border: 3px solid #263238; border-radius: 10px; background: #dce8df; }
+.box-carrossel { display: block; width: 100%; height: 250px; object-fit: contain; border-radius: 6px; background: radial-gradient(circle, #fff, #c9d8cf); }

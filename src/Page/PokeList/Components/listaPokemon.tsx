@@ -9,7 +9,7 @@ const ListaPokemon: React.FC<{listaPoke: pokemomLista[]}> = ({listaPoke}) => {
 
 
     return (
-        <div className='box-container'>    
+        <div className='box-container'>
         {listaPoke && listaPoke?.map((i, index)=>
 
 
@@ -21,7 +21,7 @@ const ListaPokemon: React.FC<{listaPoke: pokemomLista[]}> = ({listaPoke}) => {
                     
                     </div>
 
-        <p className='name-card' >{`#${getIndex(i.url)} ${i.name}`}</p>     
+        <p className='name-card' ><span>{`#${getIndex(i.url)}`}</span>{i.name}</p>
         </Link>
         </div>
   

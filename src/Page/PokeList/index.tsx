@@ -84,7 +84,7 @@ const PokeList: React.FC = () => {
 
         const list = response.data.results
 
-        setBerry(list)
+        setItems(list)
         setAnchorEl(null)
         setIsShown(true)
     }
@@ -161,6 +161,12 @@ const PokeList: React.FC = () => {
                 headerText="Berries"
             />
 
+            <main className="pokedex-list-page">
+            <section className="catalogue-shell">
+            <div className="catalogue-title">
+                <div><span className="catalogue-eyebrow">DATABASE / REGIONAL</span><h1>Pokédex</h1></div>
+                <span className="catalogue-indicator">● Sincronizado</span>
+            </div>
             <div className="header">
                 <div className="span">
                     <TextField
@@ -250,7 +256,7 @@ const PokeList: React.FC = () => {
                 </div>
             </div>
 
-            <div>
+            <div className="pokemon-results">
                 {load && <Pulse />}
 
                 {!load && (
@@ -259,6 +265,8 @@ const PokeList: React.FC = () => {
                     />
                 )}
             </div>
+            </section>
+            </main>
         </>
     )
 }

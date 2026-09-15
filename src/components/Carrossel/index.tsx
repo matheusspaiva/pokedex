@@ -4,7 +4,7 @@ import './index.css';
 
 const Carrossel: React.FC <{urls : string[]}> = ({urls}) => {
   return (
-    <div style={{ display: 'block', width:200 }}>
+    <div className="carousel-shell">
     <Carousel>
 
     {urls.map((item, index)=>

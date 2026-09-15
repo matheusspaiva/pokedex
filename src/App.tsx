@@ -1,44 +1,44 @@
-import logo1 from './assets/Image/1.svg';
-import logo5 from './assets/Image/5.svg';
-import './App.css';
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import PacMan from './components/Loader/PacMan';
+import logo1 from './assets/Image/1.svg'
+import logo5 from './assets/Image/5.svg'
+import './App.css'
+import { useState } from 'react'
+import { Link } from 'react-router-dom'
+import PacMan from './components/Loader/PacMan'
 
 function App() {
-  const [color,setColor] = useState<boolean>(false)
+  const [alternateLight, setAlternateLight] = useState(false)
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <div onClick={()=>{setColor(!color) }}>
-        <img  src={color?logo1:logo5} className="App-logo" alt="logo" />
-        </div>
-
-        <br></br>
-        <Link 
-          className="App-link"
-          to="Pokemons"
-          rel="noopener noreferrer"
+    <main className="landing-page">
+      <section className="landing-device" aria-label="Pokedex">
+        <button
+          className={`landing-sensor ${alternateLight ? 'is-active' : ''}`}
+          onClick={() => setAlternateLight(!alternateLight)}
+          aria-label="Alternar indicador da Pokedex"
+          type="button"
         >
-          <div className='box-text'>
-            <div style={{marginRight: '30px', marginTop: '7px'}}>
-            <PacMan  />  
-            </div>
+          <span className="sensor-glass" />
+          <span className="sensor-dot sensor-dot--yellow" />
+          <span className="sensor-dot sensor-dot--green" />
+        </button>
 
-          <div>
-          Acesse a Pokedex
+        <div className="landing-screen">
+          <div className="screen-header">
+            <span>POKÉDEX</span>
+            <span className="screen-status">ONLINE</span>
           </div>
-
-        <div className='inverter' style={{marginLeft: '30px', marginTop: '7px'}}>
-          <PacMan  />  
+          <img src={alternateLight ? logo1 : logo5} className="App-logo" alt="Ilustração de Pokédex" />
+          <p className="landing-copy">Seu terminal para descobrir espécies, formas e atributos Pokémon.</p>
         </div>
- 
-          </div>
 
+        <Link className="App-link" to="Pokemons">
+          <span className="link-loader"><PacMan /></span>
+          <span>Abrir Pokédex</span>
+          <span className="link-loader inverter"><PacMan /></span>
         </Link>
-      </header>
-    </div>
-  );
+      </section>
+    </main>
+  )
 }
 
-export default App;
+export default App

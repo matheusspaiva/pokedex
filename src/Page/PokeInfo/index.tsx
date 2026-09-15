@@ -1,6 +1,6 @@
 
 import React, { useCallback, useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useParams, useNavigate } from 'react-router-dom'
 import ImageInfo from './components/ImageInfo'
 import Informations from './components/Informations'
 import PokeInfo from './types/PokeInfo'
@@ -24,6 +24,8 @@ const PokeInforamacoes: React.FC = () => {
     const [load, setLoad] = useState<boolean>(true)
     const [varieties, setVarities] = useState<Variety[]>([])
 
+
+    const navigate = useNavigate()
     const loadSpecies = useCallback(async () => {
         try {
             const response = await pokeApi.get<PokeSpecie>(
@@ -39,6 +41,7 @@ const PokeInforamacoes: React.FC = () => {
 
             setVarities(pokeforms)
         } catch {
+            setVarities([])
         }
     }, [id])
 
@@ -103,14 +106,15 @@ const PokeInforamacoes: React.FC = () => {
 
             {info && erro === null && (
                 <>
+                    <main className="pokemon-page">
                     <div className="container">
                         <div>
-                            <Link
+                            {info && info.is_default  && <Link
                                 className="circle-button"
                                 to={`/pokedex/Pokemons/${Number(id) - 1}`}
                             >
                                 <FaArrowLeft />
-                            </Link>
+                            </Link>}
                         </div>
 
                         <div className="box">
@@ -119,14 +123,25 @@ const PokeInforamacoes: React.FC = () => {
                                     {info.name}
                                 </p>
 
-                                <Link
-                                    to="/pokedex/Pokemons"
-                                    className="tile-button"
-                                >
-                                    <h2>
-                                        <FaRegWindowClose />
-                                    </h2>
-                                </Link>
+                                {info.is_default ? (
+    <Link
+        to="/pokedex/Pokemons"
+        className="tile-button"
+    >
+        <h2>
+            <FaRegWindowClose />
+        </h2>
+    </Link>
+) : (
+    <button
+        className="tile-button"
+        onClick={() => navigate(-1)}
+    >
+        <h2>
+            <FaRegWindowClose />
+        </h2>
+    </button>
+)}
                             </div>
 
                             <ImageInfo
@@ -153,14 +168,15 @@ const PokeInforamacoes: React.FC = () => {
                         </div>
 
                         <div>
-                            <Link
+                            {info && info.is_default && <Link
                                 className="circle-button"
                                 to={`/pokedex/Pokemons/${Number(id) + 1}`}
                             >
                                 <FaArrowRight />
-                            </Link>
+                            </Link>}
                         </div>
                     </div>
+                    </main>
                 </>
             )}
         </>
