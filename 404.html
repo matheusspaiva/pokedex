@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <title>Redirecionando para a Pokédex</title>
+    <script>
+      // O GitHub Pages não possui fallback de SPA. Quando uma rota interna
+      // é recarregada, este arquivo encaminha a URL para o index.html.
+      (function (location) {
+        var segmentsToKeep = 1; // /pokedex
+        var path = location.pathname
+          .split('/')
+          .slice(0, 1 + segmentsToKeep)
+          .join('/');
+        var route = location.pathname
+          .split('/')
+          .slice(1 + segmentsToKeep)
+          .join('/')
+          .replace(/&/g, '~and~');
+        var query = location.search
+          ? '&' + location.search.slice(1).replace(/&/g, '~and~')
+          : '';
+
+        location.replace(
+          location.protocol +
+            '//' +
+            location.hostname +
+            (location.port ? ':' + location.port : '') +
+            path +
+            '/?/' +
+            route +
+            query +
+            location.hash
+        );
+      })(window.location);
+    </script>
+  </head>
+  <body></body>
+</html>
