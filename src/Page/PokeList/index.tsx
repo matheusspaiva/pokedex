@@ -11,6 +11,8 @@ import { Button, Menu } from '@mui/material'
 import { Modal } from '../../components/Modal/Modal'
 import { useModal } from '../../components/Modal/useModal'
 import { pokeApi } from '../../api/pokeApi'
+import LocalStorage from '../../Utils/LocalStorage'
+import { IMoves } from '../../types/Imoves'
 
 const PokeList: React.FC = () => {
     const [listaPoke, setListaPoke] = useState<pokemomLista[]>()
@@ -50,8 +52,39 @@ const PokeList: React.FC = () => {
     }, [gen])
 
     useEffect(() => {
+        loadAllmove()
         loadData()
     }, [loadData])
+
+
+    async function loadAllmove() {
+        const response = await fetch(
+            "https://pokeapi.co/api/v2/move?limit=1000"
+        );
+
+        const data = await response.json();
+
+        const localMoves = LocalStorage.get<IMoves[]>('poke-moves')
+
+        if (!localMoves || localMoves.length !== data.count) {
+            const moves = await Promise.all(
+                data.results.map(async (move: { name: string; url: string }) => {
+                    const response = await fetch(move.url);
+                    const data = await response.json();
+
+                    return {
+                        name: data.name,
+                        power: data.power,
+                        type: data.type.name,
+                        accuracy: data.accuracy,
+                        pp: data.pp
+                    };
+                })
+
+            );
+            LocalStorage.set('poke-moves', moves)
+        }
+    }
 
     function handleSearchName(value: string) {
         if (value.length === 0) {
@@ -162,110 +195,110 @@ const PokeList: React.FC = () => {
             />
 
             <main className="pokedex-list-page">
-            <section className="catalogue-shell">
-            <div className="catalogue-title">
-                <div><span className="catalogue-eyebrow">DATABASE / REGIONAL</span><h1>Pokédex</h1></div>
-                <span className="catalogue-indicator">● Sincronizado</span>
-            </div>
-            <div className="header">
-                <div className="span">
-                    <TextField
-                        id="outlined-basic"
-                        onChange={e =>
-                            handleSearchName(e.target.value)
-                        }
-                        label="PESQUISAR ..."
-                        variant="filled"
-                    />
-                </div>
+                <section className="catalogue-shell">
+                    <div className="catalogue-title">
+                        <div><span className="catalogue-eyebrow">DATABASE / REGIONAL</span><h1>Pokédex</h1></div>
+                        <span className="catalogue-indicator">● Sincronizado</span>
+                    </div>
+                    <div className="header">
+                        <div className="span">
+                            <TextField
+                                id="outlined-basic"
+                                onChange={e =>
+                                    handleSearchName(e.target.value)
+                                }
+                                label="PESQUISAR ..."
+                                variant="filled"
+                            />
+                        </div>
 
-                <div>
-                    <Select
-                        id="demo-simple-select"
-                        value={gen}
-                        onChange={e =>
-                            setGen(Number(e.target.value))
-                        }
-                    >
-                        <MenuItem value={1}>
-                            1ª Geração - Kanto
-                        </MenuItem>
+                        <div>
+                            <Select
+                                id="demo-simple-select"
+                                value={gen}
+                                onChange={e =>
+                                    setGen(Number(e.target.value))
+                                }
+                            >
+                                <MenuItem value={1}>
+                                    1ª Geração - Kanto
+                                </MenuItem>
 
-                        <MenuItem value={2}>
-                            2ª Geração - Johto
-                        </MenuItem>
+                                <MenuItem value={2}>
+                                    2ª Geração - Johto
+                                </MenuItem>
 
-                        <MenuItem value={3}>
-                            3ª Geração - Hoenn
-                        </MenuItem>
+                                <MenuItem value={3}>
+                                    3ª Geração - Hoenn
+                                </MenuItem>
 
-                        <MenuItem value={4}>
-                            4ª Geração - Sinnoh
-                        </MenuItem>
+                                <MenuItem value={4}>
+                                    4ª Geração - Sinnoh
+                                </MenuItem>
 
-                        <MenuItem value={5}>
-                            5ª Geração - Unova
-                        </MenuItem>
+                                <MenuItem value={5}>
+                                    5ª Geração - Unova
+                                </MenuItem>
 
-                        <MenuItem value={6}>
-                            6ª Geração - Kalos
-                        </MenuItem>
+                                <MenuItem value={6}>
+                                    6ª Geração - Kalos
+                                </MenuItem>
 
-                        <MenuItem value={7}>
-                            7ª Geração - Alola
-                        </MenuItem>
+                                <MenuItem value={7}>
+                                    7ª Geração - Alola
+                                </MenuItem>
 
-                        <MenuItem value={8}>
-                            8ª Geração - Galar
-                        </MenuItem>
-                    </Select>
-                </div>
+                                <MenuItem value={8}>
+                                    8ª Geração - Galar
+                                </MenuItem>
+                            </Select>
+                        </div>
 
-                <div className="list-extra">
-                    <Button
-                        id="extra-button"
-                        aria-controls={
-                            open ? 'basic-menu' : undefined
-                        }
-                        aria-haspopup="true"
-                        aria-expanded={
-                            open ? 'true' : undefined
-                        }
-                        onClick={handleClick}
-                    >
-                        Extras
-                    </Button>
+                        <div className="list-extra">
+                            <Button
+                                id="extra-button"
+                                aria-controls={
+                                    open ? 'basic-menu' : undefined
+                                }
+                                aria-haspopup="true"
+                                aria-expanded={
+                                    open ? 'true' : undefined
+                                }
+                                onClick={handleClick}
+                            >
+                                Extras
+                            </Button>
 
-                    <Menu
-                        id="basic-menu"
-                        anchorEl={anchorEl}
-                        open={open}
-                        onClose={() => setAnchorEl(null)}
-                        MenuListProps={{
-                            'aria-labelledby': 'basic-button'
-                        }}
-                    >
-                        <MenuItem onClick={showBerris}>
-                            Berries
-                        </MenuItem>
+                            <Menu
+                                id="basic-menu"
+                                anchorEl={anchorEl}
+                                open={open}
+                                onClose={() => setAnchorEl(null)}
+                                MenuListProps={{
+                                    'aria-labelledby': 'basic-button'
+                                }}
+                            >
+                                <MenuItem onClick={showBerris}>
+                                    Berries
+                                </MenuItem>
 
-                        <MenuItem onClick={showItems}>
-                            Items
-                        </MenuItem>
-                    </Menu>
-                </div>
-            </div>
+                                <MenuItem onClick={showItems}>
+                                    Items
+                                </MenuItem>
+                            </Menu>
+                        </div>
+                    </div>
 
-            <div className="pokemon-results">
-                {load && <Pulse />}
+                    <div className="pokemon-results">
+                        {load && <Pulse />}
 
-                {!load && (
-                    <ListaPokemon
-                        listaPoke={listaPokeFilter!}
-                    />
-                )}
-            </div>
-            </section>
+                        {!load && (
+                            <ListaPokemon
+                                listaPoke={listaPokeFilter!}
+                            />
+                        )}
+                    </div>
+                </section>
             </main>
         </>
     )

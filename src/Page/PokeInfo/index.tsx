@@ -18,6 +18,7 @@ import { PokemonStats } from './components/PokemonStats'
 import { IEvolutionChain } from './types/IEvolutionChain'
 import axios from 'axios'
 import EvolutionChain from './components/EvolutionChain'
+import MovesSection from './components/MovesSection'
 
 const PokeInforamacoes: React.FC = () => {
     const [info, setInfo] = useState<PokeInfo>()
@@ -116,7 +117,10 @@ const PokeInforamacoes: React.FC = () => {
 
             {info && erro === null && (
                 <>
-                {chain && <EvolutionChain evolution={chain}/> }
+                <div className="pokemon-quick-actions">
+                    {chain && <EvolutionChain evolution={chain}/> }
+                    <MovesSection moves={info.moves}/>
+                </div>
                     <main className="pokemon-page">
                     <div className="container">
                         <div>
