@@ -1,4 +1,4 @@
-﻿import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { TbMap } from "react-icons/tb";
 import { pokeApi } from "../../../api/pokeApi";
 import { Modal } from "../../../components/Modal/Modal";
