@@ -1,12 +1,13 @@
 const PokeImage: React.FC<{
-    pokemonId: number
-}> = ({pokemonId}) => {
+    pokemonId: number,
+    weight?: 'mini'| 'default'
+}> = ({pokemonId, weight= 'default'}) => {
 
 return (
    <>
 
                            <div  id={`pokeimage-${pokemonId}`} className='item'>
-                            <img alt='pokemon' width={200}  src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonId}.png`} />
+                            <img alt='pokemon'   style={weight === 'mini' ? { width: '150px', height: '150px' } : undefined}    src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonId}.png`} />
 
                         </div>
    </>

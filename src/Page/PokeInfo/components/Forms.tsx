@@ -33,13 +33,24 @@ const navigate = useNavigate()
 <>
 
 <Modal headerText={"Status basico"}  isShown={isShown} hide={toggle} modalContent={<>
-                {currentVariety.map(item =>
-                    <div onClick={() => {setIsShown(false) ;navigate(`/pokedex/Pokemons/${getIndex(item.pokemon.url, true)}`)}}  key={item.pokemon.name} className="status-box">
-                     
-                      {item.pokemon.name}
-                       <PokeImage pokemonId={Number(getIndex(item.pokemon.url, true))} />
-                    </div>
-                )}
+<div className="variety-list">
+    {currentVariety.map(item =>
+        <div
+            onClick={() => {
+                setIsShown(false);
+                navigate(`/pokedex/Pokemons/${getIndex(item.pokemon.url, true)}`)
+            }}
+            key={item.pokemon.name}
+            className="status-box"
+        >
+            {item.pokemon.name}
+            <PokeImage
+                weight="mini"
+                pokemonId={Number(getIndex(item.pokemon.url, true))}
+            />
+        </div>
+    )}
+</div>
             </>}  />
 
             

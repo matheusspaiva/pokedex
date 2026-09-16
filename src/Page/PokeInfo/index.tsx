@@ -19,6 +19,7 @@ import { IEvolutionChain } from './types/IEvolutionChain'
 import axios from 'axios'
 import EvolutionChain from './components/EvolutionChain'
 import MovesSection from './components/MovesSection'
+import { translate } from '../../Utils/translate'
 
 const PokeInforamacoes: React.FC = () => {
     const [info, setInfo] = useState<PokeInfo>()
@@ -28,7 +29,7 @@ const PokeInforamacoes: React.FC = () => {
     const [load, setLoad] = useState<boolean>(true)
     const [varieties, setVarities] = useState<Variety[]>([])
     const [chain, setChaint] = useState<IEvolutionChain|null>(null)
-
+    const [description, setDescription] = useState<string>('')
 
     const navigate = useNavigate()
     const loadSpecies = useCallback(async () => {
@@ -39,6 +40,11 @@ const PokeInforamacoes: React.FC = () => {
 
             const data = response.data
 
+        const txt = data.flavor_text_entries.find(x=> x.language.name === 'en')?.flavor_text ?? ''
+   
+    const textTranslate = await translate(data.name, txt)
+
+    setDescription(textTranslate)
             // verificação de formas
             const pokeforms = data.varieties.filter(
                 x => x.is_default === false
@@ -68,8 +74,10 @@ const PokeInforamacoes: React.FC = () => {
 
             const data = response.data
 
+
             setErro(null)
             setInfo(data)
+
 
             const images: string[] = [
                 data.sprites.front_default,
@@ -172,6 +180,7 @@ const PokeInforamacoes: React.FC = () => {
 
                             <Informations
                                 info={info}
+                                description={description}
                             />
 
                             <PokemonStats

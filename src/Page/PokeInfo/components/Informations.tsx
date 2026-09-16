@@ -1,10 +1,12 @@
 
+import { FaQuestion } from "react-icons/fa";
+import Tooltip from "../../../components/ma/Tooltip";
 import PokeInfo from "../types/PokeInfo"
 import './../styles/index.css';
 import SelectTypeSection from "./SelectTypesSection";
 
 
-const Informations: React.FC<{ info: PokeInfo }> = ({ info }) => {
+const Informations: React.FC<{ info: PokeInfo, description: string }> = ({ info, description }) => {
 
     return (
 
@@ -22,6 +24,11 @@ const Informations: React.FC<{ info: PokeInfo }> = ({ info }) => {
                                     <span>Altura</span>
                                     <strong>{info.height / 10} m</strong>
                                 </div>
+
+                                            <Tooltip text={description}>
+
+<FaQuestion size={12}/> 
+</Tooltip>
                             </div>
                             <SelectTypeSection tipos={info.types} />
                    

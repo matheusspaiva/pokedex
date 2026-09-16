@@ -13,6 +13,7 @@ import { useModal } from '../../components/Modal/useModal'
 import { pokeApi } from '../../api/pokeApi'
 import LocalStorage from '../../Utils/LocalStorage'
 import { IMoves } from '../../types/Imoves'
+import DetailItens from './Components/detailItens'
 
 const PokeList: React.FC = () => {
     const [listaPoke, setListaPoke] = useState<pokemomLista[]>()
@@ -160,6 +161,7 @@ const PokeList: React.FC = () => {
                                         />
 
                                         <p>{i.name}</p>
+                                        <DetailItens item={i.name}/>
                                     </div>
                                 ))}
                         </div>
@@ -186,6 +188,7 @@ const PokeList: React.FC = () => {
                                         />
 
                                         <p>{i.name} Berry</p>
+                                        <DetailItens item={`${i.name}-berry`}/>
                                     </div>
                                 ))}
                         </div>

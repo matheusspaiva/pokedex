@@ -17,7 +17,7 @@ const ListaPokemon: React.FC<{listaPoke: pokemomLista[]}> = ({listaPoke}) => {
         <div key={i.name} className='box-card'>
                 <Link to={`./${getIndex(i.url)}`}>
                     <div className='image-card'>
-                        <PokeImage pokemonId={Number(getIndex(i.url, true))} />
+                        <PokeImage weight='mini' pokemonId={Number(getIndex(i.url, true))} />
                     
                     </div>
 

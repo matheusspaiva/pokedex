@@ -1,0 +1,38 @@
+.tooltip-container {
+    display: inline-flex;
+}
+
+.poke-tooltip {
+    position: fixed;
+
+    transform: translate(-50%, -100%);
+
+    background: #222;
+    color: #fff;
+
+    padding: 8px 12px;
+    border-radius: 6px;
+
+    font-size: 13px;
+    line-height: 1.4;
+
+    /*
+     * NÃO quebra automaticamente.
+     * Só quebra quando o texto tiver \n.
+     */
+    white-space: pre-line;
+
+    /*
+     * Não existe limite de largura.
+     */
+    max-width: min(360px, calc(100vw - 24px));
+    overflow-wrap: anywhere;
+    text-align: left;
+
+    /*
+     * Fica acima de modal, overlay etc.
+     */
+    z-index: 2147483647;
+
+    pointer-events: none;
+}
