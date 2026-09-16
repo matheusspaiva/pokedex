@@ -20,6 +20,7 @@ import axios from 'axios'
 import EvolutionChain from './components/EvolutionChain'
 import MovesSection from './components/MovesSection'
 import { translate } from '../../Utils/translate'
+import Encounter from './components/Encounter'
 
 const PokeInforamacoes: React.FC = () => {
     const [info, setInfo] = useState<PokeInfo>()
@@ -128,6 +129,7 @@ const PokeInforamacoes: React.FC = () => {
                 <div className="pokemon-quick-actions">
                     {chain && <EvolutionChain evolution={chain}/> }
                     <MovesSection moves={info.moves}/>
+                    <Encounter id={Number(id)}/>
                 </div>
                     <main className="pokemon-page">
                     <div className="container">
