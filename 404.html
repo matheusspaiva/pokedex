@@ -7,13 +7,13 @@
       // O GitHub Pages não possui fallback de SPA. Quando uma rota interna
       // é recarregada, este arquivo encaminha a URL para o index.html.
       (function (location) {
-        var segmentsToKeep = 1; // /pokedex
-        var path = location.pathname
-          .split('/')
-          .slice(0, 1 + segmentsToKeep)
-          .join('/');
-        var route = location.pathname
-          .split('/')
+        var segments = location.pathname.split('/');
+        // The repository Pages URL is /pokedex/, but the app may also be
+        // served from a custom/user Pages domain at /. Preserve either base.
+        var isProjectPages = segments[1] === 'pokedex';
+        var segmentsToKeep = isProjectPages ? 1 : 0;
+        var path = segments.slice(0, 1 + segmentsToKeep).join('/');
+        var route = segments
           .slice(1 + segmentsToKeep)
           .join('/')
           .replace(/&/g, '~and~');
