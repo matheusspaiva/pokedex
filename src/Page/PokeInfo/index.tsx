@@ -21,6 +21,7 @@ import EvolutionChain from './components/EvolutionChain'
 import MovesSection from './components/MovesSection'
 import { translate } from '../../Utils/translate'
 import Encounter from './components/Encounter'
+import { useAuth } from '../../context/AuthContext'
 
 const PokeInforamacoes: React.FC = () => {
     const [info, setInfo] = useState<PokeInfo>()
@@ -31,6 +32,8 @@ const PokeInforamacoes: React.FC = () => {
     const [varieties, setVarities] = useState<Variety[]>([])
     const [chain, setChaint] = useState<IEvolutionChain|null>(null)
     const [description, setDescription] = useState<string>('')
+    const { user, isCaptured, toggleCaptured } = useAuth()
+    const [captureBusy, setCaptureBusy] = useState(false)
 
     const navigate = useNavigate()
     const loadSpecies = useCallback(async () => {
@@ -107,6 +110,12 @@ const PokeInforamacoes: React.FC = () => {
         loadData()
     }, [loadData])
 
+    const handleCapture = async () => {
+        if (!user || !id) return
+        setCaptureBusy(true)
+        try { await toggleCaptured(Number(id)) } finally { setCaptureBusy(false) }
+    }
+
     return (
         <>
             {load && <Ring />}
@@ -173,6 +182,7 @@ const PokeInforamacoes: React.FC = () => {
                                 numero={id}
                                 images={img}
                             />
+                            {user && <button className="capture-button" disabled={captureBusy} onClick={handleCapture} type="button">{isCaptured(Number(id)) ? 'CAPTURADO — SOLTAR' : 'SALVAR NA MINHA POKÉDEX'}</button>}
 
 
 

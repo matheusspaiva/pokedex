@@ -14,6 +14,8 @@ import { pokeApi } from '../../api/pokeApi'
 import LocalStorage from '../../Utils/LocalStorage'
 import { IMoves } from '../../types/Imoves'
 import DetailItens from './Components/detailItens'
+import { useAuth } from '../../context/AuthContext'
+import backendApi from '../../api/backendApi'
 
 const PokeList: React.FC = () => {
     const [listaPoke, setListaPoke] = useState<pokemomLista[]>()
@@ -27,12 +29,22 @@ const PokeList: React.FC = () => {
     const open = Boolean(anchorEl)
 
     const { isShown, toggle, setIsShown } = useModal()
+    const { user, logout, refreshUser } = useAuth()
+    const [profileOpen, setProfileOpen] = useState(false)
+    const [shareMessage, setShareMessage] = useState('')
+    const [shareBusy, setShareBusy] = useState(false)
+
+    const toggleSharing = async () => {
+        setShareBusy(true); setShareMessage('')
+        try { await backendApi.post('/active-code', { active: !user?.code }); await refreshUser(); setShareMessage(user?.code ? 'Compartilhamento desativado.' : 'Código gerado.') } catch (error: any) { setShareMessage(error.response?.data?.message || 'Não foi possível atualizar.') } finally { setShareBusy(false) }
+    }
+    const copyShareLink = async () => { if (!user?.code) return; await navigator.clipboard.writeText(`${window.location.origin}/compartilhar/${user.code}`); setShareMessage('Link copiado.') }
 
     const loadData = useCallback(async () => {
         setLoad(true)
 
         let valueUrl = ''
-
+        if (gen === 0) valueUrl = '/pokemon/?offset=0&limit=1025'
         if (gen === 1) valueUrl = '/pokemon/?offset=0&limit=151'
         if (gen === 2) valueUrl = '/pokemon/?offset=151&limit=100'
         if (gen === 3) valueUrl = '/pokemon/?offset=251&limit=135'
@@ -139,6 +151,7 @@ const PokeList: React.FC = () => {
 
     return (
         <>
+            <Modal isShown={profileOpen} hide={() => setProfileOpen(false)} headerText="PERFIL DO TREINADOR" modalContent={<div className="profile-modal">{user ? <><strong>{user.name}</strong><span>{user.email}</span><hr /><b>COMPARTILHAR POKÉDEX</b>{user.code ? <><code>{user.code}</code><Button onClick={copyShareLink}>COPIAR LINK</Button><Button disabled={shareBusy} onClick={toggleSharing}>DESATIVAR</Button></> : <Button disabled={shareBusy} onClick={toggleSharing}>GERAR LINK DE COMPARTILHAMENTO</Button>}{shareMessage && <small>{shareMessage}</small>}<Button onClick={logout}>SAIR</Button></> : <Button onClick={() => window.location.assign('/login')}>ENTRAR</Button>}</div>} />
             <Modal
                 isShown={isShown && items.length > 0}
                 hide={toggle}
@@ -161,7 +174,7 @@ const PokeList: React.FC = () => {
                                         />
 
                                         <p>{i.name}</p>
-                                        <DetailItens item={i.name}/>
+                                        <DetailItens item={i.name} />
                                     </div>
                                 ))}
                         </div>
@@ -188,7 +201,7 @@ const PokeList: React.FC = () => {
                                         />
 
                                         <p>{i.name} Berry</p>
-                                        <DetailItens item={`${i.name}-berry`}/>
+                                        <DetailItens item={`${i.name}-berry`} />
                                     </div>
                                 ))}
                         </div>
@@ -223,6 +236,11 @@ const PokeList: React.FC = () => {
                                     setGen(Number(e.target.value))
                                 }
                             >
+
+                                 <MenuItem value={0}>
+                                    Todas
+                                </MenuItem>
+
                                 <MenuItem value={1}>
                                     1ª Geração - Kanto
                                 </MenuItem>
@@ -262,6 +280,7 @@ const PokeList: React.FC = () => {
                         </div>
 
                         <div className="list-extra">
+                            <Button onClick={() => setProfileOpen(true)}>{user ? 'Perfil' : 'Entrar'}</Button>
                             <Button
                                 id="extra-button"
                                 aria-controls={

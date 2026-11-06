@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { createPortal } from 'react-dom'
 import './tooltip.css'
+import { TextToAudio } from '../../Utils/TextToAudio'
 
 const Tooltip: React.FC<{
     text?: string
@@ -47,6 +48,7 @@ const Tooltip: React.FC<{
                 className="tooltip-container"
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
+                onClick={()=> TextToAudio(text)}
             >
                 {children}
             </div>

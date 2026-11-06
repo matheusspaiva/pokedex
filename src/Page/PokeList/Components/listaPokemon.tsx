@@ -5,7 +5,7 @@ import pokemomLista from '../types'
 import './../index.css';
 import PokeImage from '../../../components/Image/PokeImage';
 
-const ListaPokemon: React.FC<{listaPoke: pokemomLista[]}> = ({listaPoke}) => {
+const ListaPokemon: React.FC<{listaPoke: pokemomLista[], detailBasePath?: string}> = ({listaPoke, detailBasePath = './'}) => {
 
 
     return (
@@ -15,7 +15,7 @@ const ListaPokemon: React.FC<{listaPoke: pokemomLista[]}> = ({listaPoke}) => {
 
         
         <div key={i.name} className='box-card'>
-                <Link to={`./${getIndex(i.url)}`}>
+                <Link to={`${detailBasePath}${getIndex(i.url)}`}>
                     <div className='image-card'>
                         <PokeImage weight='mini' pokemonId={Number(getIndex(i.url, true))} />
                     
