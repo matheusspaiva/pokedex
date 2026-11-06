@@ -145,7 +145,7 @@ const PokeInforamacoes: React.FC = () => {
                         <div>
                             {info && info.is_default  && <Link
                                 className="circle-button"
-                                to={`/pokedex/Pokemons/${Number(id) - 1}`}
+                                to={`/Pokemons/${Number(id) - 1}`}
                             >
                                 <FaArrowLeft />
                             </Link>}
@@ -159,7 +159,7 @@ const PokeInforamacoes: React.FC = () => {
 
                                 {info.is_default ? (
     <Link
-        to="/pokedex/Pokemons"
+        to="/Pokemons"
         className="tile-button"
     >
         <h2>
@@ -206,7 +206,7 @@ const PokeInforamacoes: React.FC = () => {
                         <div>
                             {info && info.is_default && <Link
                                 className="circle-button"
-                                to={`/pokedex/Pokemons/${Number(id) + 1}`}
+                                to={`/Pokemons/${Number(id) + 1}`}
                             >
                                 <FaArrowRight />
                             </Link>}

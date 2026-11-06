@@ -6,7 +6,7 @@ const AppRoute: React.FC = () => {
 
     return (
 
-        <BrowserRouter >
+        <BrowserRouter basename="/pokedex">
 <SystemRoute />
 
     </BrowserRouter>

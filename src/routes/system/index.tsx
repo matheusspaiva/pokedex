@@ -7,22 +7,20 @@ import PokeList from '../../Page/PokeList'
 import AuthPage from '../../Page/Auth/AuthPage'
 import ProfilePage from '../../Page/Auth/ProfilePage'
 import SharedPokedexPage from '../../Page/Auth/SharedPokedexPage'
- 
+
 const SystemRoute: React.FC = () => {
 
     return (
 
         <Routes>
-              <Route index element={<PageRender pageName="System_Home" pageTitle="Pokedex" renderComponent={<App />} />}/>
-              <Route path='pokedex' element={<PageRender pageName="System_Home" pageTitle="Pokedex" renderComponent={<App />} />}/>
-                   <Route path='pokedex/Pokemons' element={<PageRender pageName="System_Home" pageTitle="Pokedex" renderComponent={<PokeList />} />}/>
-                   <Route path='pokedex/Pokemons/:id' element={<PageRender pageName="System_Home" pageTitle="Pokedex" renderComponent={<PokeInforamacoes />} />}/>
-              <Route path='pokedex/login' element={<AuthPage registerMode={false} />} />
-              <Route path='pokedex/cadastro' element={<AuthPage registerMode />} />
-              <Route path='pokedex/perfil' element={<ProfilePage />} />
-              <Route path='compartilhar/:code' element={<SharedPokedexPage />} />
-              {/* Compatibilidade com links gerados por versões anteriores. */}
-              <Route path='pokedex/compartilhar/:code' element={<SharedPokedexPage />} />
+            <Route index element={<PageRender pageName="System_Home" pageTitle="Pokedex" renderComponent={<App />} />} />
+            <Route path='Pokemons' element={<PageRender pageName="System_Home" pageTitle="Pokedex" renderComponent={<PokeList />} />} />
+            <Route path='Pokemons/:id' element={<PageRender pageName="System_Home" pageTitle="Pokedex" renderComponent={<PokeInforamacoes />} />} />
+            <Route path='login' element={<AuthPage registerMode={false} />} />
+            <Route path='cadastro' element={<AuthPage registerMode />} />
+            <Route path='perfil' element={<ProfilePage />} />
+            <Route path='compartilhar/:code' element={<SharedPokedexPage />} />
+            {/* Compatibilidade com links gerados por versões anteriores. */}
         </Routes>
     )
 }

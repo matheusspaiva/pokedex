@@ -38,7 +38,7 @@ const navigate = useNavigate()
         <div
             onClick={() => {
                 setIsShown(false);
-                navigate(`/pokedex/Pokemons/${getIndex(item.pokemon.url, true)}`)
+                navigate(`/Pokemons/${getIndex(item.pokemon.url, true)}`)
             }}
             key={item.pokemon.name}
             className="status-box"

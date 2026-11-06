@@ -34,7 +34,7 @@ function App() {
           <div className="landing-account">{user ? <><Link to="/perfil">{user.name}</Link><button type="button" onClick={logout}>Sair</button></> : <><Link to="/login">Entrar</Link><Link to="/cadastro">Criar conta</Link></>}</div>
         </div>
 
-        <Link className="App-link" to="/pokedex/Pokemons">
+        <Link className="App-link" to="/Pokemons">
           <span className="link-loader"><PacMan /></span>
           <span>Abrir Pokédex</span>
           <span className="link-loader inverter"><PacMan /></span>

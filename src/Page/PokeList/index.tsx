@@ -151,7 +151,7 @@ const PokeList: React.FC = () => {
 
     return (
         <>
-            <Modal isShown={profileOpen} hide={() => setProfileOpen(false)} headerText="PERFIL DO TREINADOR" modalContent={<div className="profile-modal">{user ? <><strong>{user.name}</strong><span>{user.email}</span><hr /><b>COMPARTILHAR POKÉDEX</b>{user.code ? <><code>{user.code}</code><Button onClick={copyShareLink}>COPIAR LINK</Button><Button disabled={shareBusy} onClick={toggleSharing}>DESATIVAR</Button></> : <Button disabled={shareBusy} onClick={toggleSharing}>GERAR LINK DE COMPARTILHAMENTO</Button>}{shareMessage && <small>{shareMessage}</small>}<Button onClick={logout}>SAIR</Button></> : <Button onClick={() => window.location.assign('/login')}>ENTRAR</Button>}</div>} />
+            <Modal isShown={profileOpen} hide={() => setProfileOpen(false)} headerText="PERFIL DO TREINADOR" modalContent={<div className="profile-modal">{user ? <><strong>{user.name}</strong><span>{user.email}</span><hr /><b>COMPARTILHAR POKÉDEX</b>{user.code ? <><code>{user.code}</code><Button onClick={copyShareLink}>COPIAR LINK</Button><Button disabled={shareBusy} onClick={toggleSharing}>DESATIVAR</Button></> : <Button disabled={shareBusy} onClick={toggleSharing}>GERAR LINK DE COMPARTILHAMENTO</Button>}{shareMessage && <small>{shareMessage}</small>}<Button onClick={logout}>SAIR</Button></> : <Button onClick={() => window.location.assign('/pokedex/login')}>ENTRAR</Button>}</div>} />
             <Modal
                 isShown={isShown && items.length > 0}
                 hide={toggle}
