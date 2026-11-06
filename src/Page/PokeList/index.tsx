@@ -29,7 +29,7 @@ const PokeList: React.FC = () => {
     const open = Boolean(anchorEl)
 
     const { isShown, toggle, setIsShown } = useModal()
-    const { user, logout, refreshUser } = useAuth()
+    const { user, captured, logout, refreshUser } = useAuth()
     const [profileOpen, setProfileOpen] = useState(false)
     const [shareMessage, setShareMessage] = useState('')
     const [shareBusy, setShareBusy] = useState(false)
@@ -214,7 +214,7 @@ const PokeList: React.FC = () => {
                 <section className="catalogue-shell">
                     <div className="catalogue-title">
                         <div><span className="catalogue-eyebrow">DATABASE / REGIONAL</span><h1>Pokédex</h1></div>
-                        <span className="catalogue-indicator">● Sincronizado</span>
+                        <span className="catalogue-indicator">● Sincronizado {user ? `• ${captured.length} capturado${captured.length === 1 ? '' : 's'}` : ''}</span>
                     </div>
                     <div className="header">
                         <div className="span">

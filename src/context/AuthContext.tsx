@@ -9,6 +9,7 @@ interface AuthContextValue {
   login: (email: string, password: string) => Promise<void>
   register: (name: string, email: string, password: string) => Promise<void>
   logout: () => void
+  captured: number[]
   isCaptured: (pokemonId: number) => boolean
   toggleCaptured: (pokemonId: number) => Promise<boolean>
   refreshUser: () => Promise<void>
@@ -48,12 +49,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const logout = () => { localStorage.removeItem('pokedex-token'); setToken(null); setUser(null); setCaptured([]) }
   const isCaptured = (pokemonId: number) => captured.includes(pokemonId)
   const toggleCaptured = async (pokemonId: number) => {
-    if (isCaptured(pokemonId)) await backendApi.delete(`/captured-pokemon/${pokemonId}`)
+    const wasCaptured = isCaptured(pokemonId)
+    if (wasCaptured) await backendApi.delete(`/captured-pokemon/${pokemonId}`)
     else await backendApi.post('/captured-pokemon', { pokemonId })
-    setCaptured(current => isCaptured(pokemonId) ? current.filter(id => id !== pokemonId) : [...current, pokemonId])
-    return !isCaptured(pokemonId)
+    setCaptured(current => wasCaptured ? current.filter(id => id !== pokemonId) : [...current, pokemonId])
+    return !wasCaptured
   }
-  return <AuthContext.Provider value={{ user, token, loading, login, register, logout, isCaptured, toggleCaptured, refreshUser }}>{children}</AuthContext.Provider>
+  return <AuthContext.Provider value={{ user, token, loading, login, register, logout, captured, isCaptured, toggleCaptured, refreshUser }}>{children}</AuthContext.Provider>
 }
 
 export const useAuth = () => { const value = useContext(AuthContext); if (!value) throw new Error('useAuth deve ser usado dentro de AuthProvider'); return value }
