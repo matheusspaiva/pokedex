@@ -20,7 +20,9 @@ const SystemRoute: React.FC = () => {
               <Route path='login' element={<AuthPage registerMode={false} />} />
               <Route path='cadastro' element={<AuthPage registerMode />} />
               <Route path='perfil' element={<ProfilePage />} />
-              <Route  path='pokedex/compartilhar/:code' element={<PageRender pageName="System_Home" pageTitle="Pokedex" renderComponent={<SharedPokedexPage />} />} />
+              <Route path='compartilhar/:code' element={<SharedPokedexPage />} />
+              {/* Compatibilidade com links gerados por versões anteriores. */}
+              <Route path='pokedex/compartilhar/:code' element={<SharedPokedexPage />} />
         </Routes>
     )
 }
