@@ -20,7 +20,7 @@ const SystemRoute: React.FC = () => {
               <Route path='login' element={<AuthPage registerMode={false} />} />
               <Route path='cadastro' element={<AuthPage registerMode />} />
               <Route path='perfil' element={<ProfilePage />} />
-              <Route  path='compartilhar/:code' element={<SharedPokedexPage />} />
+              <Route  path='pokedex/compartilhar/:code' element={<SharedPokedexPage />} />
         </Routes>
     )
 }

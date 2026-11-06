@@ -38,7 +38,7 @@ const PokeList: React.FC = () => {
         setShareBusy(true); setShareMessage('')
         try { await backendApi.post('/active-code', { active: !user?.code }); await refreshUser(); setShareMessage(user?.code ? 'Compartilhamento desativado.' : 'Código gerado.') } catch (error: any) { setShareMessage(error.response?.data?.message || 'Não foi possível atualizar.') } finally { setShareBusy(false) }
     }
-    const copyShareLink = async () => { if (!user?.code) return; await navigator.clipboard.writeText(`${window.location.origin}/compartilhar/${user.code}`); setShareMessage('Link copiado.') }
+    const copyShareLink = async () => { if (!user?.code) return; await navigator.clipboard.writeText(`${window.location.origin}/pokedex/compartilhar/${user.code}`); setShareMessage('Link copiado.') }
 
     const loadData = useCallback(async () => {
         setLoad(true)
